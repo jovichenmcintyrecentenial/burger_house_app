@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../theme/app_theme.dart';
 
 class AppBarMainColor extends StatelessWidget implements PreferredSizeWidget {
-  final actions;
+  final List<Widget>? actions;
 
   const AppBarMainColor({
     Key? key,
-    @required this.title, this.actions,
+    required this.title, this.actions,
   }) : super(key: key);
-  final title;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
       actions: actions,
       backgroundColor: AppTheme.of(context).primaryColorLight,
-      brightness: Brightness.dark,
       elevation: 0,
-      centerTitle: true,
+      centerTitle: true, systemOverlayStyle: SystemUiOverlayStyle.light,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

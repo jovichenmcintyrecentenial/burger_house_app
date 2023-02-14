@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 Widget _createAlertButton({title,onPress}){
   return  TextButton(
+    onPressed: onPress,
     child: Text
       (title),
-    onPressed: onPress,
   );
 }
 void dismiss(BuildContext context){

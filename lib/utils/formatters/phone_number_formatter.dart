@@ -13,7 +13,7 @@ class PhoneNumberFormatter {
   static String cleanNumber(
       {required number, CleanType options = CleanType.allowSpaces}) {
     var regex = RegExp(r'(-|\(|\)|\+)');
-    var replaced;
+    String replaced;
     if (options == CleanType.allowSpaces) {
       replaced = number.replaceAll(regex, ' ').replaceAll('  ', ' ');
     } else {

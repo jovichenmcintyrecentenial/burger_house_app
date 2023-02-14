@@ -34,8 +34,6 @@ class Images {
 }
 
 class FontFamily {
-  static const codecPro = 'CodecPro';
-  static const roboto = 'Roboto';
   static const poppins = 'Poppins';
 }
 

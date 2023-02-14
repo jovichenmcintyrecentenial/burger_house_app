@@ -1,7 +1,5 @@
-// @dart=2.12
 import 'dart:async';
 
-import '../utils/helper.dart';
 
 enum NotificationAction{ appInitiated,updateMain,logout,appActive,appInactive,apiUnsupported,checkSettings }
 

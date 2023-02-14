@@ -61,7 +61,7 @@ class Helper {
         }
 
         //for date so that flutter can parse it from string
-        var dateWithT = date.substring(0, 8) + 'T0000';
+        var dateWithT = '${date.substring(0, 8)}T0000';
 
         //dateStr = 03/05/1990
         //date = 19900503T0000

@@ -17,7 +17,6 @@ class AppBarWhiteColor extends StatelessWidget implements PreferredSizeWidget {
       statusBarColor: Colors.transparent,
     ));
     return AppBar(
-      brightness: Brightness.light,
       iconTheme: IconThemeData(
         color: AppTheme.of(context).mainFontColor, //change your color here
       ),
@@ -29,7 +28,7 @@ class AppBarWhiteColor extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.white,
       elevation: 0,
-      centerTitle: true,
+      centerTitle: true, systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
   }
 

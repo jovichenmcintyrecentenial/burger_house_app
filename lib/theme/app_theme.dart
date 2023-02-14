@@ -113,7 +113,7 @@ class AppTheme {
     fontWeight: FontWeight.w300,
     color: Colors.black,
   );
-  var headline6;
+  late TextStyle headline6;
   var headline7 = const TextStyle(
     fontSize: 17.0,
     fontWeight: FontWeight.w300,

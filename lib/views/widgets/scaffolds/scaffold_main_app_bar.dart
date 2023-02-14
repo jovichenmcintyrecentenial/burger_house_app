@@ -55,8 +55,10 @@ class ScaffoldMainAppBar extends StatelessWidget {
                           Align(
                               alignment: Alignment.bottomCenter,
                               child: FadingVisibility(
+                                  visible: isVisible,
                                   child: stackBottom ?? const SizedBox(),
-                                  visible: isVisible))
+
+                              ))
                         ],
                   );
                 }
