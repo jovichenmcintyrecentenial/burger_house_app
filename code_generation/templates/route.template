@@ -1,0 +1,4 @@
+    router.define({{className}}View.routeName, handler: Handler(handlerFunc: (context,params){
+       final args = context!.settings!.arguments;
+       return {{className}}View(args: args);
+    }));

@@ -1,3 +1,7 @@
+#flutter Version Manager
+.fvm
+.vscode/settings.json
+
 # Miscellaneous
 *.class
 *.log
@@ -8,7 +12,6 @@
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -32,13 +35,24 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Web related
+lib/generated_plugin_registrant.dart
+
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+*.g.dart
+pubspec.lock
+*.lock
+config/.env
+
+# Gradle #
+#.gradle
+#build.gradle
+gradlew
+gradlew.bat
+local.properties
+/gradle

@@ -1,0 +1,78 @@
+// Package imports:
+
+// ignore_for_file: constant_identifier_names
+
+import 'dart:io';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'helper.dart';
+
+enum EnvKey {
+  TIME_ZONE,
+  APP_NAME,
+  APP_VERSION,
+  EXCHANGE_URL,
+  APP_VERSION_CODE,
+  ANDROID_CLIENT_ID,
+  ANDROID_CLIENT_SECRET,
+  IOS_CLIENT_ID,
+  IOS_CLIENT_SECRET,
+  GRANT_TYPE,
+  GRANT_TYPE_REFRESH,
+  GRANT_TYPE_PUBLIC,
+  PROXY_PORT,
+  PROXY_ADDRESS,
+  SCOPE
+}
+
+class Env {
+  static String? getPlatformSpecificValue(List<EnvKey> keys) {
+    String? value;
+    for (var key in keys) {
+      if (Platform.isAndroid &&
+          key.toString().toLowerCase().contains('android')) {
+        value = get(key);
+      } else if (Platform.isIOS &&
+          key.toString().toLowerCase().contains('ios')) {
+        value = get(key);
+      }
+    }
+
+    return value;
+  }
+
+  static String? get(EnvKey envKey) {
+    final key = _getKeyString(envKey);
+    if (_hasValue(key)) {
+      return _getValue(key);
+    }
+    Helper.logger.e('unable to find key ${key.toString()} in env');
+    return null;
+  }
+
+  static String _getKeyString(EnvKey envKey) {
+    final key = envKey.toString().replaceAll('EnvKey.', '');
+    return key;
+  }
+
+  static bool containsKey(EnvKey envKey) {
+    final key = _getKeyString(envKey);
+    if (_hasValue(key)) {
+      return true;
+    }
+    return false;
+  }
+
+  static String _getValue(String key) {
+    return dotenv.env[key]!;
+  }
+
+  static bool _hasValue(String key) {
+    return dotenv.env.containsKey(key);
+  }
+
+  static Future load() async {
+    return await dotenv.load(fileName:'config/.env');
+  }
+}

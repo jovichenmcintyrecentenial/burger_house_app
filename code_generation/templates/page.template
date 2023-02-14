@@ -1,0 +1,30 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:house_for_rent_sale_jamaica/theme/app_theme.dart';
+import 'package:house_for_rent_sale_jamaica/utils/widgets/scaffolds/scaffold_white_app_bar.dart';
+import 'package:house_for_rent_sale_jamaica/views/pages/main_view/providers/property_view_provider.dart';
+import 'package:provider/provider.dart';
+
+class {{className}}View extends StatelessWidget {
+  static final routeName = '{{className}}';
+
+  final Object? args;
+
+  const {{className}}View({Key? key,required this.args}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<{{className}}Provider>(
+        create: (_) => {{className}}Provider(),
+        builder: (context, snapshot) {
+          return ScaffoldWhiteAppBar(
+            backgroundColor: AppTheme.of(context).primaryColorDark,
+            title: ,
+            body: Consumer<{{className}}Provider>(
+                builder: (context, provider, snapshot) {
+              return Text("BODY HERE");
+            }),
+          );
+        });
+  }
+}
