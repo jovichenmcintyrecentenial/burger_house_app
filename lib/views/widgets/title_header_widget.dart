@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 
 class TitleHeaderWidget extends StatelessWidget {
   final String title;
+
+  final double? fontSize;
+  final double? fontHeight;
   const TitleHeaderWidget(this.title, {
-    super.key,
+    super.key, this.fontSize, this.fontHeight
   });
 
   @override
   Widget build(BuildContext context) {
-    return  AutoTextSizeWidget(title,fontSize: 24,fontWeight: FontWeight.w700,color: Colors.white,);
+    return AutoTextSizeWidget(
+      title,
+      height: fontHeight,
+      fontSize: fontSize ?? 24,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    );
   }
 }
