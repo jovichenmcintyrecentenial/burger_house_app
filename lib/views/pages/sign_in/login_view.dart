@@ -1,6 +1,8 @@
+import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/views/pages/sign_up/register_view.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
@@ -34,6 +36,7 @@ class LoginView extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 27),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children:   [
                     const GenericImagehandler(Images.logoFull,width: double.infinity,),
                     const SizedBox(height: 17,),
@@ -43,7 +46,6 @@ class LoginView extends StatelessWidget {
                     const SizedBox(height: 11,),
                     MainButtonWidget('Login', onTap:()=>null),
                     const SizedBox(height: 25,),
-
                     const _ForgotPasswordWidget(),
                   ],
                 ),
@@ -51,7 +53,7 @@ class LoginView extends StatelessWidget {
             }),
             stackBottom: TwoColorTextWidget(
                   'Don’t have an account?', 'Create account',
-                  onTap: () => Helper.showToast('message')));
+                  onTap: () => AppRoutes.navigate(context, RegisterView.routeName, args)));
         });
   }
 }

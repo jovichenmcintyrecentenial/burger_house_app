@@ -28,6 +28,7 @@ class InputWidget extends StatelessWidget {
         child:  TextField(
           keyboardType:keyboardType,
           obscureText: obscureText,
+          autofocus: false,
           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
           decoration: InputDecoration(
               label: AutoTextSizeWidget(

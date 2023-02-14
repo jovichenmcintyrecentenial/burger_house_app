@@ -32,6 +32,7 @@ class MainButtonWidget extends StatelessWidget {
             color: Colors.white,
             fontFamily: FontFamily.poppins,
             fontWeight: FontWeight.w700,
+            fontSize: 20,
 
           ),
         ),

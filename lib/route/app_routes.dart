@@ -3,6 +3,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 
 import '../utils/helper.dart';
+import '../views/pages/sign_up/register_view.dart';
 
 
 class AppRoutes {
@@ -47,6 +48,10 @@ class AppRoutes {
         });
     //DON'T DELETE COMMENT BELOW
     //{{codeGen}}
+    router.define(RegisterView.routeName, handler: Handler(handlerFunc: (context,params){
+       final args = context!.settings!.arguments;
+       return RegisterView(args: args);
+    }));
     router.define(LoginView.routeName, handler: Handler(handlerFunc: (context,params){
        final args = context!.settings!.arguments;
        return LoginView(args: args);

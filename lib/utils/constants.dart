@@ -4,6 +4,7 @@ class Images {
   static const assetImage = 'assets/images/';
 
   static const String logoFull = '${assetImage}logo-full.png';
+  static const String logoWords = '${assetImage}logo-words.png';
   static var successIcon = '${assetImage}success_icon.svg';
   static var infoIcon = '${assetImage}info_icon.svg';
   static var errorIcon = '${assetImage}error_icon.svg';
