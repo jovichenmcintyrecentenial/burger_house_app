@@ -19,25 +19,41 @@ class GirdView extends StatelessWidget {
     MenuItem(image: Images.burger4,name: 'BH Single',calories: 600,price: 7.99),
     MenuItem(image: Images.burger5,name: 'Bacon Deluxe',calories: 600,price: 7.99),
     MenuItem(image: Images.burger5, name: 'HOUSE Triple',calories: 600,price: 7.99),
+    MenuItem(image: Images.burger1,name: 'XXX Classic',calories: 600,price: 7.99),
   ];
+
+  List<Widget> buildGrids(){
+    List<Widget> gridRows = [];
+    var index = 1;
+    for(var _ in items){
+      if(index % 2 == 0 && index != 0){
+        gridRows.add(GridRow(items[index-2],items[index-1]));
+      }
+      index++;
+    }
+
+    if(index % 2 == 0){
+      gridRows.add(GridRow(items[index-2],null));
+    }
+
+     return gridRows;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children:  [
-        GridRow(),
-        const SizedBox(height: 0,),
-        GridRow(),
-
+        ...buildGrids(),
         const SizedBox(height: 150,)
       ],);
   }
 }
 
 class GridRow extends StatelessWidget {
+  final MenuItem item1;
+  final MenuItem? item2;
 
-  final menu = MenuItem(image: Images.burger1,name: 'Burger Classic',calories: 600,price: 7.99);
-  GridRow({
+  const GridRow(this.item1, this.item2, {
     super.key,
   });
 
@@ -45,10 +61,13 @@ class GridRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        Expanded(child: GridItem()),
-        SizedBox(width:20),
-        Expanded(child: GridItem()),
+      children:  [
+        Expanded(child: GridItem(item1)),
+        const SizedBox(width:20),
+        Expanded(
+          child: Opacity(opacity:item2 == null? 0.001:1,
+          child: GridItem(item2??item1)),
+        ),
       ],
     );
   }
@@ -56,15 +75,15 @@ class GridRow extends StatelessWidget {
 
 class GridItem extends StatelessWidget {
 
+  final MenuItem menu;
 
-  const GridItem({
+  const GridItem(this.menu,{
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
 
-    var menu =   MenuItem(image: Images.burger2,name: 'Burger Classic',calories: 600,price: 7.99);
     double height = 220;
     return SizedBox(
       height: height,
