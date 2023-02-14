@@ -1,5 +1,6 @@
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
+import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
@@ -9,6 +10,8 @@ import 'package:burger_house/views/pages/sign_in/providers/login_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../widgets/two_color_text_widget.dart';
 
 class LoginView extends StatelessWidget {
   static const routeName = 'Login';
@@ -43,10 +46,12 @@ class LoginView extends StatelessWidget {
                 ),
               );
             }),
-            stackBottom:                     InputWidget(title:'Password',obscureText: true,),
-
-          );
+            stackBottom: TwoColorTextWidget(
+                  'Don’t have an account?', 'Create account',
+                  onTap: () => Helper.showToast('message')));
         });
   }
 }
+
+
 

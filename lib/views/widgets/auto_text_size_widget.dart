@@ -26,8 +26,8 @@ class AutoTextSizeWidget extends StatelessWidget {
 
       {Key? key,
         this.color,
-        this.fontWeight,
-        this.fontSize = 17.0,
+        this.fontWeight = FontWeight.w500,
+        this.fontSize = 16.0,
         this.fontFamily,
         this.maxLine = 1,
         this.textAlign = TextAlign.left,

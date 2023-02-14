@@ -3,6 +3,7 @@ import 'package:burger_house/theme/provider/theme_provider.dart';
 import 'package:burger_house/views/pages/sign_in/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,50 +12,52 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ],
-        builder: (context, snapshot) {
-          return Consumer<ThemeProvider>(
-              builder: (context, themeProvider, snapshot) {
-            return MaterialApp(
-              onGenerateRoute: AppRoutes.router.generator,
-              navigatorKey: AppRoutes.navigatorState,
+    return OverlaySupport.global(
+      child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ThemeProvider()),
+          ],
+          builder: (context, snapshot) {
+            return Consumer<ThemeProvider>(
+                builder: (context, themeProvider, snapshot) {
+              return MaterialApp(
+                onGenerateRoute: AppRoutes.router.generator,
+                navigatorKey: AppRoutes.navigatorState,
 
-              title: 'Flutter Demo',
-              theme:ThemeData(
-                fontFamily: themeProvider.theme.defaultFont
-                    .toString()
-                    .replaceFirst('FontFamily.', ''),
-                bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white,
-                    modalBackgroundColor: themeProvider.theme.accentColor
+                title: 'Flutter Demo',
+                theme:ThemeData(
+                  fontFamily: themeProvider.theme.defaultFont
+                      .toString()
+                      .replaceFirst('FontFamily.', ''),
+                  bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white,
+                      modalBackgroundColor: themeProvider.theme.accentColor
+                  ),
+                  appBarTheme: const AppBarTheme(
+                    systemOverlayStyle: SystemUiOverlayStyle.dark,),
+                  textTheme: TextTheme(
+                    labelLarge: themeProvider.theme.button,
+                    labelSmall: themeProvider.theme.overline,
+                    titleLarge: themeProvider.theme.headline5,
+                    headlineSmall: themeProvider.theme.headline5,
+                    headlineMedium: themeProvider.theme.headline4,
+                    displaySmall: themeProvider.theme.headline3,
+                    displayMedium: themeProvider.theme.headline2,
+                    displayLarge: themeProvider.theme.headline1,
+                    titleSmall: themeProvider.theme.subtitle2,
+                    titleMedium: themeProvider.theme.headline1,
+                    bodyMedium: themeProvider.theme.bodyText2,
+                    bodyLarge: themeProvider.theme.bodyText1,
+                    bodySmall: themeProvider.theme.caption,
+                  ),
+                  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                      .copyWith(secondary: themeProvider.theme.accentColor),
                 ),
-                appBarTheme: const AppBarTheme(
-                  systemOverlayStyle: SystemUiOverlayStyle.dark,),
-                textTheme: TextTheme(
-                  labelLarge: themeProvider.theme.button,
-                  labelSmall: themeProvider.theme.overline,
-                  titleLarge: themeProvider.theme.headline5,
-                  headlineSmall: themeProvider.theme.headline5,
-                  headlineMedium: themeProvider.theme.headline4,
-                  displaySmall: themeProvider.theme.headline3,
-                  displayMedium: themeProvider.theme.headline2,
-                  displayLarge: themeProvider.theme.headline1,
-                  titleSmall: themeProvider.theme.subtitle2,
-                  titleMedium: themeProvider.theme.headline1,
-                  bodyMedium: themeProvider.theme.bodyText2,
-                  bodyLarge: themeProvider.theme.bodyText1,
-                  bodySmall: themeProvider.theme.caption,
-                ),
-                colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-                    .copyWith(secondary: themeProvider.theme.accentColor),
-              ),
-              home: const LoginView(args: null,),
-            );
-          }
-        );
-      }
+                home: const LoginView(args: null,),
+              );
+            }
+          );
+        }
+      ),
     );
   }
 }

@@ -60,11 +60,9 @@ class ScaffoldMainAppBar extends StatelessWidget {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Container(
-                                        color: Colors.green,
-                                        height: 10,
-                                        width: 10,
-                                      ),
+                                      stackBottom ?? const SizedBox(),
+                                       const SizedBox(height: 20),
+
                                     ],
                                   ),
                                 ))
