@@ -96,12 +96,14 @@ class HomeView extends StatelessWidget {
           const SizedBox(height:22),
           const InputWidget(title:'Search your cravings'),
           const SizedBox(height:22),
-
           const TitleHeaderWidget('HOUSE Deal!',fontSize: 29,fontHeight: 1.3,),
           const SubTitleWidget('Top mouth watering deal of the week'),
           const SizedBox(height:22),
+          AdvertBanner(images),
+          const SizedBox(height:15),
+          const TitleHeaderWidget('Popular',fontSize: 29,fontHeight: 1.3,),
+          const SubTitleWidget('Top orders in the HOUSE!'),
 
-          AdvertBanner(images)
         ],
       ),
     );

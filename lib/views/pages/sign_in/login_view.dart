@@ -68,7 +68,7 @@ class _ForgotPasswordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
-        onTap: ()=>null,
+        onTap: () => null,
         child: AutoTextSizeWidget(
           'Forgot Password',
           color: AppTheme.of(context).accentColor,

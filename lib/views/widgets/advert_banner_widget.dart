@@ -21,6 +21,8 @@ class AdvertBanner extends StatelessWidget {
             GenericImagehandler(images[i],height: Helper.getScaleHeightPercentage(context,30),width: double.infinity,),
         options: CarouselOptions(
           autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 3),
+
           enlargeCenterPage: true,
           viewportFraction: 1,
           aspectRatio: 2.0,
