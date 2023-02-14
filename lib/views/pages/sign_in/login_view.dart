@@ -23,6 +23,7 @@ class LoginView extends StatelessWidget {
         create: (_) => LoginProvider(),
         builder: (context, snapshot) {
           return ScaffoldMainAppBar(
+            shouldScroll: true,
             backgroundColor: AppTheme.of(context).primaryColor,
             title: '',
             body: Consumer<LoginProvider>(
@@ -42,6 +43,8 @@ class LoginView extends StatelessWidget {
                 ),
               );
             }),
+            stackBottom:                     InputWidget(title:'Password',obscureText: true,),
+
           );
         });
   }

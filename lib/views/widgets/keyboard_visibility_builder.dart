@@ -52,35 +52,12 @@ class _KeyboardVisibilityBuilderState extends State<KeyboardVisibilityBuilder>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
+    return
         widget.builder(
           context,
           widget.child,
           _isKeyboardVisible,
-        ),
-        widget.shouldShowDone != null && widget.shouldShowDone!?Align(
-            alignment: Alignment.bottomCenter,
-            child: Visibility(
-              visible: _isKeyboardVisible,
-              child: Container(
-                color: Colors.grey[200],
-                child: Row(
-                  children: [
-                    const Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          Helper.hideKeyboard(context);
-                          setState(() {
-                            _isKeyboardVisible = false;
-                          });
-                        },
-                        child: const Text('Done'))
-                  ],
-                ),
-              ),
-            )):const SizedBox(),
-      ],
-    );
+        );
+
   }
 }

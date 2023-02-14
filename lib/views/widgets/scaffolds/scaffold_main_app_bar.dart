@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/views/widgets/dismissable_keyboard_container.dart';
 import 'package:flutter/material.dart';
 
 import '../app_bars/app_bar_main_color.dart';
@@ -15,13 +16,12 @@ class ScaffoldMainAppBar extends StatelessWidget {
     required this.title,
     required this.backgroundColor,
     required this.body,
-    this.appBarColor, this.actions, this.shouldScroll = false, this.stackBottom, this.expandedContainer = false,
+    this.appBarColor, this.actions, this.shouldScroll = false, this.stackBottom,
   }) : super(key: key);
 
   final String title;
   final List<Widget>? actions;
   final bool shouldScroll;
-  final bool expandedContainer;
   final Color backgroundColor;
   final Color? appBarColor;
   final Widget body;
@@ -31,37 +31,47 @@ class ScaffoldMainAppBar extends StatelessWidget {
     return Scaffold(
       appBar: AppBarMainColor(title: title,actions:actions),
       backgroundColor: backgroundColor,
+      resizeToAvoidBottomInset: false,
       body: !shouldScroll
           ? SafeArea(child: body)
           : SafeArea(
-            child:  KeyboardVisibilityBuilder(
-                shouldShowDone: Platform.isIOS,
-                builder: (context, snapshot,isVisible) {
-                  return Stack(
-                    children: [
-                      !expandedContainer?
-                      ListView(
+            child:  DismissableKeyboardContainer(
+              child: KeyboardVisibilityBuilder(
+                  shouldShowDone: Platform.isIOS,
+                  builder: (context, snapshot,isVisible) {
+                    return
+                      Stack(
                         children: [
-                          SizedBox(
-                            height: Helper.availableContentHeight(context,
-                                shrinkOnKeyboardVisible: true)+Helper.getScaleHeightPercentage(context, 10),
-                            child: Container(child: body),
-                          )
-                        ],
-                      ):SizedBox(
-                        height: double.infinity,
-                        child: body,
-                      ),
-                          Align(
-                              alignment: Alignment.bottomCenter,
-                              child: FadingVisibility(
-                                  visible: isVisible,
-                                  child: stackBottom ?? const SizedBox(),
+                          ListView(
 
-                              ))
-                        ],
-                  );
-                }
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                  child:body,
+                                ),
+                                const SizedBox(height: 20),
+
+
+                              ],
+                            ),
+                            Align(
+                                alignment: Alignment.bottomCenter,
+                                child: SafeArea(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        color: Colors.green,
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                    ],
+                                  ),
+                                ))
+                          ],
+                      );
+                  }
+              ),
             )
       )
     );
