@@ -21,16 +21,25 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          ClipRect(
+    return Stack(
+      children: [
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: ClipRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: const SizedBox(width: double.infinity,height: 100,),
+              filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+              child:  Container(
+                color: const Color(0xff231F20).withOpacity(0.78),
+                width: double.infinity,
+                height: 100,
+              ),
             ),
           ),
-          Container(
+        ),
+        SafeArea(
+          child: Container(
             height: 73,
             margin: const EdgeInsets.only(left: 0 ,right: 0,bottom: 30),
             padding: EdgeInsets.symmetric(horizontal: Helper.getScaleWidthPercentage(context, 10)),
@@ -48,9 +57,9 @@ class NavBar extends StatelessWidget {
               ],
             ),
           ),
+        ),
 
-        ],
-      ),
+      ],
     );
   }
 }

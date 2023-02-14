@@ -22,7 +22,7 @@ class AppTheme {
   Color mainAppColor = Colors.blue;
   Color failViewColor = const Color(0xFF344058);
 
-  Color mainFontColor = const Color(0xFFCCCCCC);
+  Color mainFontColor = const Color(0xFFFFFFFF);
   Color mainFontColor2 = const Color(0xffFFFFFF);
   Color mainFontColor3 = const Color(0xffA9A9A9);
   Color lightFontColor = const Color(0xffFFFFFF);

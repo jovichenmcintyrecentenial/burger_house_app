@@ -15,8 +15,15 @@ class Images {
   static var menuIcon = '${assetImage}menu_nav.svg';
   static var cartIcon = '${assetImage}cart_nav.svg';
   static var orderIcon = '${assetImage}order_nav.svg';
+  static var starIcon = '${assetImage}star.svg';
 
   static var slide1 = '${assetImage}slide1.png';
+
+  static var burger1 = '${assetImage}buger_1.png';
+  static var burger2 = '${assetImage}buger_2.png';
+  static var burger3 = '${assetImage}buger_3.png';
+  static var burger4 = '${assetImage}buger_4.png';
+  static var burger5 = '${assetImage}buger_5.png';
 
 
 }
