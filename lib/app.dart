@@ -27,8 +27,6 @@ class MyApp extends StatelessWidget {
                 fontFamily: themeProvider.theme.defaultFont
                     .toString()
                     .replaceFirst('FontFamily.', ''),
-                primarySwatch: Colors.blue,
-                accentColor: themeProvider.theme.accentColor,
                 bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white,
                     modalBackgroundColor: themeProvider.theme.accentColor
                 ),
@@ -49,6 +47,8 @@ class MyApp extends StatelessWidget {
                   bodyLarge: themeProvider.theme.bodyText1,
                   bodySmall: themeProvider.theme.caption,
                 ),
+                colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                    .copyWith(secondary: themeProvider.theme.accentColor),
               ),
               home: const LoginView(args: null,),
             );

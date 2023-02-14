@@ -1,9 +1,9 @@
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
-import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
+import 'package:burger_house/views/widgets/main_button_widget.dart';
 import 'package:burger_house/views/widgets/scaffolds/scaffold_main_app_bar.dart';
 import 'package:burger_house/views/pages/sign_in/providers/login_provider.dart';
 
@@ -30,12 +30,14 @@ class LoginView extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 27),
                 child: Column(
-                  children: const [
+                  children:  const [
                     GenericImagehandler(Images.logoFull,width: double.infinity,),
                     SizedBox(height: 17,),
                     InputWidget(title:'Username'),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 11,),
                     InputWidget(title:'Password',obscureText: true,),
+                    SizedBox(height: 11,),
+                    MainButtonWidget('Login')
                   ],
                 ),
               );
@@ -44,3 +46,4 @@ class LoginView extends StatelessWidget {
         });
   }
 }
+

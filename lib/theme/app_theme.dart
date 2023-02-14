@@ -18,7 +18,7 @@ class AppTheme {
   Color primaryColor = const Color(0xff231F20);
   Color primaryColorDark = const Color(0xff231F20);
   Color keyPadColor = const Color(0xFFF8F8F8);
-  Color accentColor = Colors.white;
+  Color accentColor = const Color(0xFFDF933B);
   Color mainAppColor = Colors.blue;
   Color failViewColor = const Color(0xFF344058);
 
@@ -61,71 +61,71 @@ class AppTheme {
     );
   }
 
-  var defaultFont = FontFamily.CodecPro;
+  var defaultFont = FontFamily.Poppins;
 
   var bodyText1 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var overline = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var bodyText2 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var caption = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var button = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline1 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline2 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline3 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline4 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline5 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var headline7 = const TextStyle(
     fontSize: 17.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.grey,
   );
   var subtitle1 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
   var subtitle2 = const TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w700,
     color: Colors.black,
   );
 

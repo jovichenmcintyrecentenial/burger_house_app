@@ -91,7 +91,7 @@ flutter:
     - assets/fonts/
 
   fonts:
-    - family: Avenir
+    - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Light.ttf
           weight: 100
