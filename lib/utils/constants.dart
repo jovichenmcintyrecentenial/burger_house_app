@@ -5,6 +5,7 @@ class Images {
 
   static const String logoFull = '${assetImage}logo-full.png';
   static const String logoWords = '${assetImage}logo-words.png';
+  static const String tempAvatar = '${assetImage}temp_avatar.png';
   static var successIcon = '${assetImage}success_icon.svg';
   static var infoIcon = '${assetImage}info_icon.svg';
   static var errorIcon = '${assetImage}error_icon.svg';
@@ -14,6 +15,8 @@ class Images {
   static var menuIcon = '${assetImage}menu_nav.svg';
   static var cartIcon = '${assetImage}cart_nav.svg';
   static var orderIcon = '${assetImage}order_nav.svg';
+
+  static var slide1 = '${assetImage}slide1.png';
 
 
 }
