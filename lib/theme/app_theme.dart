@@ -13,7 +13,7 @@ class AppTheme {
     return Provider.of<ThemeProvider>(context).theme;
   }
 
-  Color primaryColorLight = const Color(0xff303030);
+  Color primaryColorLight = const Color(0xff363031);
   Color primaryColorLighter = const Color(0xff555555);
   Color primaryColor = const Color(0xff231F20);
   Color primaryColorDark = const Color(0xff231F20);
