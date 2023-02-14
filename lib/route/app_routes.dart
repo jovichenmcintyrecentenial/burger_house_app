@@ -46,6 +46,14 @@ class AppRoutes {
         });
     //DON'T DELETE COMMENT BELOW
     //{{codeGen}}
+    router.define(LoginView.routeName, handler: Handler(handlerFunc: (context,params){
+       final args = context!.settings!.arguments;
+       return LoginView(args: args);
+    }));
+    router.define(TransactionDetailsView.routeName, handler: Handler(handlerFunc: (context,params){
+       final args = context!.settings!.arguments;
+       return TransactionDetailsView(args: args);
+    }));
 
 
 

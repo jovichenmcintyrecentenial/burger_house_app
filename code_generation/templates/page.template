@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:house_for_rent_sale_jamaica/theme/app_theme.dart';
-import 'package:house_for_rent_sale_jamaica/utils/widgets/scaffolds/scaffold_white_app_bar.dart';
-import 'package:house_for_rent_sale_jamaica/views/pages/main_view/providers/property_view_provider.dart';
+import 'package:burger_house/theme/app_theme.dart';
+import 'package:burger_house/views/widgets/scaffolds/scaffold_main_app_bar.dart';
 import 'package:provider/provider.dart';
 
 class {{className}}View extends StatelessWidget {
-  static final routeName = '{{className}}';
+  static const routeName = '{{className}}';
 
   final Object? args;
 
@@ -17,7 +16,7 @@ class {{className}}View extends StatelessWidget {
     return ChangeNotifierProvider<{{className}}Provider>(
         create: (_) => {{className}}Provider(),
         builder: (context, snapshot) {
-          return ScaffoldWhiteAppBar(
+          return ScaffoldMainAppBar(
             backgroundColor: AppTheme.of(context).primaryColorDark,
             title: ,
             body: Consumer<{{className}}Provider>(
