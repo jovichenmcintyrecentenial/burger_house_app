@@ -34,14 +34,17 @@ class LoginView extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 27),
                 child: Column(
-                  children:  const [
-                    GenericImagehandler(Images.logoFull,width: double.infinity,),
-                    SizedBox(height: 17,),
-                    InputWidget(title:'Username'),
-                    SizedBox(height: 11,),
-                    InputWidget(title:'Password',obscureText: true,),
-                    SizedBox(height: 11,),
-                    MainButtonWidget('Login')
+                  children:   [
+                    const GenericImagehandler(Images.logoFull,width: double.infinity,),
+                    const SizedBox(height: 17,),
+                    const InputWidget(title:'Username'),
+                    const SizedBox(height: 11,),
+                    const InputWidget(title:'Password',obscureText: true,),
+                    const SizedBox(height: 11,),
+                    MainButtonWidget('Login', onTap:()=>null),
+                    const SizedBox(height: 25,),
+
+                    const _ForgotPasswordWidget(),
                   ],
                 ),
               );
@@ -50,6 +53,26 @@ class LoginView extends StatelessWidget {
                   'Don’t have an account?', 'Create account',
                   onTap: () => Helper.showToast('message')));
         });
+  }
+}
+
+class _ForgotPasswordWidget extends StatelessWidget {
+  const _ForgotPasswordWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTap: ()=>null,
+        child: AutoTextSizeWidget(
+          'Forgot Password',
+          color: AppTheme.of(context).accentColor,
+          fontFamily: FontFamily.poppins,
+          fontWeight: FontWeight.w500,
+
+        ),
+      ),
+    );
   }
 }
 

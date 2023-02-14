@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/widgets/dismissable_keyboard_container.dart';
 import 'package:flutter/material.dart';
 
 import '../app_bars/app_bar_main_color.dart';
-import '../fading_visibility.dart';
 import '../keyboard_visibility_builder.dart';
 
 class ScaffoldMainAppBar extends StatelessWidget {

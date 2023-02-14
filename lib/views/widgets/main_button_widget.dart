@@ -8,27 +8,32 @@ class MainButtonWidget extends StatelessWidget {
 
   final String title;
 
+  final Function onTap;
+
   const MainButtonWidget(this.title, {
-    super.key,
+    super.key, required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: ()=>onTap,
+      child: Container(
 
-      height:72,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppTheme.of(context).accentColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: AutoTextSizeWidget(
-          title,
-          color: Colors.white,
-          fontFamily: FontFamily.poppins,
-          fontWeight: FontWeight.w700,
+        height:72,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppTheme.of(context).accentColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: AutoTextSizeWidget(
+            title,
+            color: Colors.white,
+            fontFamily: FontFamily.poppins,
+            fontWeight: FontWeight.w700,
 
+          ),
         ),
       ),
     );
