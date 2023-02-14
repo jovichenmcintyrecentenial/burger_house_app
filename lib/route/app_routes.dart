@@ -1,3 +1,4 @@
+import 'package:burger_house/views/pages/sign_in/login_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 
@@ -50,10 +51,7 @@ class AppRoutes {
        final args = context!.settings!.arguments;
        return LoginView(args: args);
     }));
-    router.define(TransactionDetailsView.routeName, handler: Handler(handlerFunc: (context,params){
-       final args = context!.settings!.arguments;
-       return TransactionDetailsView(args: args);
-    }));
+
 
 
 

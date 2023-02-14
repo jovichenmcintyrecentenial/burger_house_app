@@ -16,7 +16,7 @@ class AppBarMainColor extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(title),
       actions: actions,
-      backgroundColor: AppTheme.of(context).primaryColorLight,
+      backgroundColor: AppTheme.of(context).primaryColorDark,
       elevation: 0,
       centerTitle: true, systemOverlayStyle: SystemUiOverlayStyle.light,
     );

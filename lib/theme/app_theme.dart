@@ -15,8 +15,8 @@ class AppTheme {
 
   Color primaryColorLight = const Color(0xff303030);
   Color primaryColorLighter = const Color(0xff555555);
-  Color primaryColor = const Color(0xff212121);
-  Color primaryColorDark = const Color(0xff212121);
+  Color primaryColor = const Color(0xff231F20);
+  Color primaryColorDark = const Color(0xff231F20);
   Color keyPadColor = const Color(0xFFF8F8F8);
   Color accentColor = Colors.white;
   Color mainAppColor = Colors.blue;
@@ -113,7 +113,6 @@ class AppTheme {
     fontWeight: FontWeight.w300,
     color: Colors.black,
   );
-  late TextStyle headline6;
   var headline7 = const TextStyle(
     fontSize: 17.0,
     fontWeight: FontWeight.w300,
