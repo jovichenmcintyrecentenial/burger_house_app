@@ -10,6 +10,12 @@ class Images {
   static var errorIcon = '${assetImage}error_icon.svg';
   static var closeIcon = '${assetImage}close_icon.svg';
 
+  static var homeIcon = '${assetImage}home_nav.svg';
+  static var menuIcon = '${assetImage}menu_nav.svg';
+  static var cartIcon = '${assetImage}cart_nav.svg';
+  static var orderIcon = '${assetImage}order_nav.svg';
+
+
 }
 
 class FontFamily {

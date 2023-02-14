@@ -2,6 +2,7 @@ import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/views/pages/main_view/main_manager_view.dart';
 import 'package:burger_house/views/pages/sign_up/register_view.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
@@ -44,8 +45,10 @@ class LoginView extends StatelessWidget {
                     const SizedBox(height: 11,),
                     const InputWidget(title:'Password',obscureText: true,),
                     const SizedBox(height: 11,),
-                    MainButtonWidget('Login', onTap:()=>null),
-                    const SizedBox(height: 25,),
+                      MainButtonWidget('Login',
+                          onTap: () => AppRoutes.navigate(
+                              context, MainManagerView.routeName, args)),
+                      const SizedBox(height: 25,),
                     const _ForgotPasswordWidget(),
                   ],
                 ),
