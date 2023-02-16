@@ -9,7 +9,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'helper.dart';
 
 enum EnvKey {
-   BASE_URL
+
+  PROXY_PORT,
+  PROXY_ADDRESS,
+  BASE_URL
 }
 
 class Env {
