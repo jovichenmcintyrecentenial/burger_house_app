@@ -15,6 +15,11 @@ class LocalStorage {
     return rootBundle.loadString('assets/${file!}');
   }
 
+  /// Use this new method to save data to storage,
+  /// be sure to add your key to LSKey enum
+  Future<bool> saveAwaitable(dynamic key, String data) async {
+    return await LocalStorage._prefs.setString(key.toString(), data);
+  }
 
   static Future<LocalStorage> create() async {
     LocalStorage._prefs = await SharedPreferences.getInstance();
