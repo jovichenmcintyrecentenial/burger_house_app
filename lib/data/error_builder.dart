@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../utils/helper.dart';
-import '../utils/translations.dart';
 
 class ErrorFactory {
   //these will be removed temporary this is just to keep name similar when
@@ -24,27 +24,27 @@ class ErrorFactory {
     }
     return false;
   }
+
+  static FutureOr<Null> showError(Object? error,StackTrace ){
+      Helper.showToast(buildMessage(error));
+      return null;
+  }
+
   //server return none user friendly message so app has to interpret here and show proper translation as well
-  static String buildMessage(BuildContext context, error, {String? api}) {
+  static String buildMessage( error, {String? api}) {
     if (error is DioError) {
       final dioError = error;
-      if (_contains(dioError, [ErrorStrings.tooMany])) {
-        return tooManyRequest;
-      }
-      if (_contains(dioError, [ErrorStrings.accountWasFound])) {
-        return loginMobileNumberUnkown;
-      }
-      if (_contains
-        (
-          dioError, [ErrorStrings.timeOut, ErrorStrings.socket, '110'])) {
-        return networkError;
-      }
-      if (_contains(dioError, [ErrorStrings.emailAlreadyInUseByThisUser,ErrorStrings.emailAlreadyInUse])) {
-        return needsFix('This email already in use');
+      if(dioError.response?.data != null && dioError.response?.data['message'] != null){
+        var message = dioError.response?.data['message'];
+        if(message != null){
+          return message;
+        }
       }
     } else {
       Helper.logger.e(error);
     }
+
+
     return unableToCompleteTask;
   }
 

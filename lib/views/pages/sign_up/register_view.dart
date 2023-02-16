@@ -1,6 +1,5 @@
 import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/sign_up/providers/register_provider.dart';
-import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/main_button_widget.dart';
 import 'package:burger_house/views/widgets/title_header_widget.dart';

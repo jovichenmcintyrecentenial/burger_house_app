@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/helper.dart';
-import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/color_change_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:flutter/material.dart';

@@ -6,6 +6,13 @@ import 'package:flutter/widgets.dart';
 import '../utils/helper.dart';
 import '../views/pages/sign_up/register_view.dart';
 
+class GenericArgs<T> {
+  final T param;
+
+  GenericArgs({
+    required this.param,
+  });
+}
 
 class AppRoutes {
 

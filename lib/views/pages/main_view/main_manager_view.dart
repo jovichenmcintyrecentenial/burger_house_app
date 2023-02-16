@@ -1,14 +1,10 @@
-import 'package:burger_house/models/menu_food.dart';
 import 'package:burger_house/utils/helper.dart';
-import 'package:burger_house/views/widgets/GridView.dart';
+import 'package:burger_house/views/widgets/grid_view.dart';
 import 'package:burger_house/views/widgets/advert_banner_widget.dart';
-import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
-import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/nav_bar.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:burger_house/views/widgets/title_header_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:burger_house/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/constants.dart';

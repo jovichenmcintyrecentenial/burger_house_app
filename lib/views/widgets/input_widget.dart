@@ -8,11 +8,11 @@ class InputWidget extends StatelessWidget {
   final String title;
   final bool obscureText;
   final TextInputType? keyboardType;
-
+  final TextEditingController? controller;
   const InputWidget({
     super.key, required this.title,
     this.keyboardType,
-    this.obscureText = false
+    this.obscureText = false, this.controller
   });
 
   @override
@@ -28,6 +28,7 @@ class InputWidget extends StatelessWidget {
         child:  TextField(
           keyboardType:keyboardType,
           obscureText: obscureText,
+          controller: controller,
           autofocus: false,
           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
           decoration: InputDecoration(
