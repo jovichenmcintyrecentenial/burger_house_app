@@ -62,7 +62,7 @@ class AppRoutes {
     }));
     router.define(RegisterView.routeName, handler: Handler(handlerFunc: (context,params){
        final args = context!.settings!.arguments;
-       return RegisterView(args: args);
+       return RegisterView(args: args as GenericArgs?);
     }));
     router.define(LoginView.routeName, handler: Handler(handlerFunc: (context,params){
        final args = context!.settings!.arguments;

@@ -2,6 +2,7 @@ import 'package:burger_house/models/mixins/validator_mixin.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
+import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/main_view/main_manager_view.dart';
 import 'package:burger_house/views/pages/sign_up/register_view.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
@@ -69,6 +70,7 @@ class LoginView extends StatelessWidget with ValidatorMixin<LoginProvider> {
 
   @override
   void onSuccessValidation(BuildContext context, {String? routeName, LoginProvider? provider, GenericArgs? args}) {
+    Helper.hideKeyboard(context);
     provider!.login((){
       super.onSuccessValidation(context, routeName:routeName, provider:provider, args: args);
 
