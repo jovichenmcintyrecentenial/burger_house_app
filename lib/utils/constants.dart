@@ -13,6 +13,11 @@ class Images {
   static var errorIcon = '${assetImage}error_icon.svg';
   static var closeIcon = '${assetImage}close_icon.svg';
 
+  static var logoutIcon = '${assetImage}pro_logout.svg';
+  static var lockIcon = '${assetImage}pro_change_password.svg';
+  static var ordersIcon = '${assetImage}pro_orders.svg';
+  static var userIcon = '${assetImage}pro_edit.svg';
+
   static var homeIcon = '${assetImage}home_nav.svg';
   static var menuIcon = '${assetImage}menu_nav.svg';
   static var cartIcon = '${assetImage}cart_nav.svg';

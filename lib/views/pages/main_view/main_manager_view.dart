@@ -1,11 +1,11 @@
 import 'package:burger_house/views/pages/main_view/home_view.dart';
 import 'package:burger_house/views/pages/main_view/orders_view.dart';
+import 'package:burger_house/views/pages/main_view/profile_view.dart';
 import 'package:burger_house/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/input_widget.dart';
 import 'menu_view.dart';
 import 'providers/main_manager_view_provider.dart';
 
@@ -42,18 +42,10 @@ class MainManagerView extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         controller: controller,
                         children:   <Widget>[
-                          Center(
-                            child: HomeView(),
-                          ),
-                          Center(
-                            child: MenuView(),
-                          ),
-                          Center(
-                            child: OrdersView(),
-                          ),
-                          const Center(
-                            child: InputWidget(title:'ss'),
-                          ),
+                          HomeView(),
+                          MenuView(),
+                          OrdersView(),
+                          ProfileView(),
                         ],
                       ),
                     ),

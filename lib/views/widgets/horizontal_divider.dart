@@ -1,5 +1,4 @@
 
-import 'package:burger_house/theme/app_theme.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../utils/helper.dart';
@@ -36,7 +35,7 @@ class HorizontalDivider extends StatelessWidget {
           Expanded(
               child: Container(
                   height: thickness,
-                  color: color ?? AppTheme.of(context).primaryColorDark)),
+                  color: color ?? Color(0xff231F20))),
         ],
       ),
     );

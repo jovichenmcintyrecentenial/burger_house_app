@@ -56,10 +56,10 @@ class _NavBarState extends State<NavBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NavButtonItem(isActive: _isActive(), image: Images.homeIcon, onTap: () =>jumpToPage(0),title: 'Home',),
-                NavButtonItem(isActive: widget.pageController.page!.toInt() == 1, image: Images.menuIcon, onTap: () =>jumpToPage(1),title: ('Menu'),),
-                NavButtonItem(isActive: widget.pageController.page!.toInt() == 2, image: Images.orderIcon,onTap: () =>jumpToPage(2),title: ('Orders'),),
-                NavButtonItem(isActive: widget.pageController.page!.toInt() == 3, image: Images.cartIcon, onTap:   () =>jumpToPage(3),title: ('Cart'),),
+                NavButtonItem(isActive: _isActive(0), image: Images.homeIcon, onTap: () =>jumpToPage(0),title: 'Home',),
+                NavButtonItem(isActive: _isActive(1), image: Images.menuIcon, onTap: () =>jumpToPage(1),title: ('Menu'),),
+                NavButtonItem(isActive: _isActive(2), image: Images.orderIcon,onTap: () =>jumpToPage(2),title: ('Orders'),),
+                NavButtonItem(isActive: _isActive(3), image: Images.cartIcon, onTap:   () =>jumpToPage(3),title: ('Cart'),),
               ],
             ),
           ),
@@ -69,8 +69,8 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  bool _isActive() {
-    return widget.pageController.page?.toInt() == 0;
+  bool _isActive(num) {
+    return widget.pageController.page?.toInt() == num;
   }
 
   void jumpToPage(int i) {
