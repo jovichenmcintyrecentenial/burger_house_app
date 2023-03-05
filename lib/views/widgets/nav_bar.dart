@@ -76,7 +76,7 @@ class _NavBarState extends State<NavBar> {
   void jumpToPage(int i) {
     setState(() {
 
-    });
+    });;
     widget.pageController.jumpToPage(i);
   }
 }
