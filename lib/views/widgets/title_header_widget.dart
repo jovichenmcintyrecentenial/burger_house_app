@@ -6,8 +6,9 @@ class TitleHeaderWidget extends StatelessWidget {
 
   final double? fontSize;
   final double? fontHeight;
+  final FontWeight? fontWeight;
   const TitleHeaderWidget(this.title, {
-    super.key, this.fontSize, this.fontHeight
+    super.key, this.fontSize, this.fontHeight,  this.fontWeight
   });
 
   @override
@@ -16,7 +17,7 @@ class TitleHeaderWidget extends StatelessWidget {
       title,
       height: fontHeight,
       fontSize: fontSize ?? 24,
-      fontWeight: FontWeight.w700,
+      fontWeight: fontWeight ?? FontWeight.w700,
       color: Colors.white,
     );
   }

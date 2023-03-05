@@ -1,4 +1,5 @@
 import 'package:burger_house/views/pages/main_view/home_view.dart';
+import 'package:burger_house/views/pages/main_view/orders_view.dart';
 import 'package:burger_house/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,8 +48,8 @@ class MainManagerView extends StatelessWidget {
                           Center(
                             child: MenuView(),
                           ),
-                          const Center(
-                            child: InputWidget(title:'ss'),
+                          Center(
+                            child: OrdersView(),
                           ),
                           const Center(
                             child: InputWidget(title:'ss'),
