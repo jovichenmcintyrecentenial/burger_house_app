@@ -11,13 +11,20 @@ import '../../utils/constants.dart';
 
 
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   final PageController pageController;
 
   const NavBar(this.pageController, {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+
+  var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -49,10 +56,10 @@ class NavBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NavButtonItem(image: Images.homeIcon, onTap: () =>pageController.jumpToPage(0),title: 'Home',),
-                NavButtonItem(image: Images.menuIcon, onTap: () =>pageController.jumpToPage(1),title: ('Menu'),),
-                NavButtonItem(image: Images.orderIcon,onTap: () =>pageController.jumpToPage(2),title: ('Orders'),),
-                NavButtonItem(image: Images.cartIcon, onTap:   () =>pageController.jumpToPage(3),title: ('Cart'),),
+                NavButtonItem(isActive: _isActive(), image: Images.homeIcon, onTap: () =>jumpToPage(0),title: 'Home',),
+                NavButtonItem(isActive: widget.pageController.page!.toInt() == 1, image: Images.menuIcon, onTap: () =>jumpToPage(1),title: ('Menu'),),
+                NavButtonItem(isActive: widget.pageController.page!.toInt() == 2, image: Images.orderIcon,onTap: () =>jumpToPage(2),title: ('Orders'),),
+                NavButtonItem(isActive: widget.pageController.page!.toInt() == 3, image: Images.cartIcon, onTap:   () =>jumpToPage(3),title: ('Cart'),),
               ],
             ),
           ),
@@ -61,17 +68,29 @@ class NavBar extends StatelessWidget {
       ],
     );
   }
+
+  bool _isActive() {
+    return widget.pageController.page?.toInt() == 0;
+  }
+
+  void jumpToPage(int i) {
+    setState(() {
+
+    });
+    widget.pageController.jumpToPage(i);
+  }
 }
 
 class NavButtonItem extends StatelessWidget {
 
   final String image;
   final Function onTap;
+  final bool isActive;
 
   final String title;
 
   const NavButtonItem({
-    Key? key, required this.image, required this.onTap,required this.title,
+    Key? key, required this.image, required this.onTap,required this.title,  this.isActive = false,
   }) : super(key: key);
 
   @override
@@ -88,7 +107,7 @@ class NavButtonItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ColorChangeWidget(
-                color: const Color(0xff231F20),
+                color:  isActive?AppTheme.of(context).accentColor:AppTheme.of(context).primaryColorDark,
                 child: GenericImagehandler(
                   image,
                   height: 37,
