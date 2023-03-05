@@ -6,6 +6,8 @@ class Images {
   static const String logoFull = '${assetImage}logo-full.png';
   static const String logoWords = '${assetImage}logo-words.png';
   static const String tempAvatar = '${assetImage}temp_avatar.png';
+  static const String cheeseBurgerMenu = '${assetImage}cheese-burger-menu.png';
+  static const String menu = '${assetImage}menu.png';
   static var successIcon = '${assetImage}success_icon.svg';
   static var infoIcon = '${assetImage}info_icon.svg';
   static var errorIcon = '${assetImage}error_icon.svg';

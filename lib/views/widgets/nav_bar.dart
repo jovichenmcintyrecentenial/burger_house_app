@@ -40,7 +40,7 @@ class NavBar extends StatelessWidget {
         SafeArea(
           child: Container(
             height: 73,
-            margin: const EdgeInsets.only(left: 0 ,right: 0,bottom: 30),
+            margin: const EdgeInsets.only(left: 20 ,right: 20,bottom: 30),
             padding: EdgeInsets.symmetric(horizontal: Helper.getScaleWidthPercentage(context, 10)),
             decoration:  BoxDecoration(
               color: AppTheme.of(context).primaryColorLight,
