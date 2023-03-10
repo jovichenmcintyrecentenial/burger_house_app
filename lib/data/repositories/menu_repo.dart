@@ -13,8 +13,11 @@ abstract class MenuRepo {
   @GET('/menus')
   Future<List<MenuItem>> getMenuItems(
       @DioOptions() dioOptions,
-      {@Query('popular')  bool? isPopular,
-      @Query('query')  String? searchQuery,}
+      {
+        @Query('popular')  bool? isPopular,
+        @Query('types')  bool? types,
+        @Query('query')  String? searchQuery,
+      }
   );
 
 

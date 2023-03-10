@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 
 class MenuItemBaseProvider extends SegueNotifierViewProvider {
   List<MenuItem>? menuItems;
+  bool isType = false;
 
   var  searchController = TextEditingController();
 
@@ -24,12 +25,13 @@ class MenuItemBaseProvider extends SegueNotifierViewProvider {
 
   }
 
-  void getMenuItems({var isPopular = false, var search = null}) async {
+  void getMenuItems({var isPopular = false, var search = null, bool types = false}) async {
+    isType = types;
     startLoading();
 
     //pull from cache
     ServiceLocator.locator<MenuRepo>()
-        .getMenuItems(pullFromDisk(), isPopular: isPopular,searchQuery: search )
+        .getMenuItems(pullFromDisk(), isPopular: isPopular,searchQuery: search ,types:types)
         .then((items) {
           menuItems = items;
           notifyListenersSafe();
@@ -37,7 +39,7 @@ class MenuItemBaseProvider extends SegueNotifierViewProvider {
 
     //pull from net
     ServiceLocator.locator<MenuRepo>()
-        .getMenuItems(pullFromNet(), isPopular: isPopular,searchQuery: search )
+        .getMenuItems(pullFromNet(), isPopular: isPopular,searchQuery: search,types:types )
         .then((items) {
       menuItems = items;
       notifyListenersSafe();

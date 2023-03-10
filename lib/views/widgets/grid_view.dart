@@ -36,13 +36,13 @@ class GirdView extends StatelessWidget {
     var items = provider.menuItems!;
     for(var _ in items){
       if(index % 2 == 0 && index != 0){
-        gridRows.add(GridRow(items[index-2],items[index-1]));
+        gridRows.add(GridRow(items[index-2],items[index-1],isType:provider.isType));
       }
       index++;
     }
 
     if(index % 2 == 0){
-      gridRows.add(GridRow(items[index-2],null));
+      gridRows.add(GridRow(items[index-2],null,isType:provider.isType));
     }
 
      return gridRows;
@@ -61,8 +61,10 @@ class GirdView extends StatelessWidget {
 class GridRow extends StatelessWidget {
   final MenuItem item1;
   final MenuItem? item2;
+  final bool isType;
 
   const GridRow(this.item1, this.item2, {
+    this.isType = false,
     super.key,
   });
 
@@ -71,11 +73,11 @@ class GridRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:  [
-        Expanded(child: GridItem(item1)),
+        Expanded(child: GridItem(item1,isType: isType,)),
         const SizedBox(width:20),
         Expanded(
           child: Opacity(opacity:item2 == null? 0.001:1,
-          child: GridItem(item2??item1)),
+          child: GridItem(item2??item1,isType: isType,)),
         ),
       ],
     );
@@ -85,14 +87,17 @@ class GridRow extends StatelessWidget {
 class GridItem extends StatelessWidget {
 
   final MenuItem menu;
+  final bool isType;
+
+
 
   const GridItem(this.menu,{
     super.key,
+    this.isType = false,
   });
 
   @override
   Widget build(BuildContext context) {
-
     double height = 220;
     return SizedBox(
       height: height,
@@ -115,9 +120,10 @@ class GridItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GenericImagehandler(menu.imageUrl,width: double.infinity,height: 130,),
               ),
-              AutoTextSizeWidget(menu.name!,fontWeight: FontWeight.w600,fontSize: 16,),
+              SizedBox(height: isType?10:0,),
+              AutoTextSizeWidget(isType?menu.type!:menu.name!,fontWeight: FontWeight.w600,fontSize: 16,),
               const SizedBox(height:5),
-              Row(
+              !isType?Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GenericImagehandler(Images.starIcon,width: 20,),
@@ -126,7 +132,7 @@ class GridItem extends StatelessWidget {
                   const SizedBox(width: 10,),
                   AutoTextSizeWidget('${menu.calories} Cals',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86)),
                 ],
-              )
+              ):SizedBox()
 
             ],
           )
