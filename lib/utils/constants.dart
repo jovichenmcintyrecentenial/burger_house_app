@@ -37,6 +37,7 @@ class Images {
 
 class FontFamily {
   static const poppins = 'Poppins';
+  static const rastanty = 'Rastanty';
 }
 
 class Strings {

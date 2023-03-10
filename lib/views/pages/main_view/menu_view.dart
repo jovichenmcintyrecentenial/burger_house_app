@@ -7,6 +7,7 @@ import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 
 class MenuView extends StatelessWidget {
   MenuView({
@@ -26,13 +27,27 @@ class MenuView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                     children: [
-                      GenericImagehandler(Images.menu,width: double.infinity,),
+                      Stack(
+                        children: [
+                          GenericImagehandler(Images.menu,width: double.infinity,),
+                          Positioned(
+                            left: 20,
+                            bottom: -30,
+                            child: AutoTextSizeWidget(
+                              'Menu',
+                              fontFamily: FontFamily.rastanty,
+                              fontSize: 120,
+                              color: Color(0xffE7B547),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: Helper.getScaleWidthPercentage(context, 5)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:  [
-                            const SizedBox(height:22),
                             const SubTitleWidget('Top mouth watering deal of the week'),
                             const SizedBox(height:10),
                             Consumer<MenuViewProvider>(
