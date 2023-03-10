@@ -12,14 +12,17 @@ import 'package:provider/provider.dart';
 import '../../widgets/avatar_widget.dart';
 
 class HomeView extends StatelessWidget {
+  final bool isKeyboardVisble;
   HomeView({
-    super.key,
+    super.key, required this.isKeyboardVisble,
   });
 
   final List<String> images = [Images.slide1,Images.slide1,Images.slide1,Images.slide1,Images.slide1];
 
   @override
   Widget build(BuildContext context) {
+
+
     return ChangeNotifierProvider(
       create: (_)=>HomeViewProvider(),
       child: SingleChildScrollView(
@@ -47,15 +50,29 @@ class HomeView extends StatelessWidget {
                       const SubTitleWidget('Hello Johnson',fontWeight: FontWeight.w500,),
                       const TitleHeaderWidget('Hungry Now?',fontSize: 29,fontHeight: 1.3,),
                       const SizedBox(height:22),
-                      const InputWidget(title:'Search your cravings'),
-                      const SizedBox(height:22),
-                      const TitleHeaderWidget('HOUSE Deal!',fontSize: 29,fontHeight: 1.3,),
-                      const SubTitleWidget('Top mouth watering deal of the week'),
-                      const SizedBox(height:22),
-                      AdvertBanner(images),
-                      const SizedBox(height:15),
-                      const TitleHeaderWidget('Popular',fontSize: 29,fontHeight: 1.3,),
-                      const SubTitleWidget('Top orders in the HOUSE!'),
+                      Consumer<HomeViewProvider>(
+                        builder: (context,provider, snapshot) {
+                          return InputWidget(
+                              title: 'Search your cravings',
+                              onChangeText: provider
+                                  .onChangeSearch);
+                        }
+                      ),
+
+                      !isKeyboardVisble?
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height:22),
+                          const TitleHeaderWidget('HOUSE Deal!',fontSize: 29,fontHeight: 1.3,),
+                          const SubTitleWidget('Top mouth watering deal of the week'),
+                          const SizedBox(height:22),
+                          AdvertBanner(images),
+                          const SizedBox(height:15),
+                          const TitleHeaderWidget('Popular',fontSize: 29,fontHeight: 1.3,),
+                          const SubTitleWidget('Top orders in the HOUSE!'),
+                        ],
+                      ):SizedBox(),
                       Consumer<HomeViewProvider>(
                         builder: (context,provider, snapshot) {
                           return GirdView(provider: provider,);

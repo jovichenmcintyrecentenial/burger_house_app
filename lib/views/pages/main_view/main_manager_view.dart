@@ -1,6 +1,7 @@
 import 'package:burger_house/views/pages/main_view/home_view.dart';
 import 'package:burger_house/views/pages/main_view/orders_view.dart';
 import 'package:burger_house/views/pages/main_view/profile_view.dart';
+import 'package:burger_house/views/widgets/keyboard_visibility_builder.dart';
 import 'package:burger_house/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,27 +33,31 @@ class MainManagerView extends StatelessWidget {
           return  Scaffold(
             extendBodyBehindAppBar: true,
             backgroundColor: const Color(0xff231F20),
-            body: Stack(
-              children: [
-                Column(
+            body: KeyboardVisibilityBuilder(
+                builder: (context, snapshot,isVisible) {
+                return Stack(
                   children: [
+                    Column(
+                      children: [
 
-                    Expanded(
-                      child: PageView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: controller,
-                        children:   <Widget>[
-                          HomeView(),
-                          MenuView(),
-                          OrdersView(),
-                          ProfileView(),
-                        ],
-                      ),
+                        Expanded(
+                          child: PageView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            controller: controller,
+                            children:   <Widget>[
+                              HomeView(isKeyboardVisble:isVisible),
+                              MenuView(),
+                              OrdersView(),
+                              ProfileView(),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+                    !isVisible?Align(alignment:Alignment.bottomCenter,child: NavBar(controller)):SizedBox()
                   ],
-                ),
-                Align(alignment:Alignment.bottomCenter,child: NavBar(controller))
-              ],
+                );
+              }
             ),
           );
         });

@@ -9,6 +9,21 @@ import 'package:flutter/cupertino.dart';
 class MenuItemBaseProvider extends SegueNotifierViewProvider {
   List<MenuItem>? menuItems;
 
+  var  searchController = TextEditingController();
+
+  void onChangeSearch(String text){
+    if(text.isNotEmpty) {
+      getMenuItems(isPopular: false, search: text);
+    }
+    else{
+      initalState();
+    }
+  }
+
+  void initalState(){
+
+  }
+
   void getMenuItems({var isPopular = false, var search = null}) async {
     startLoading();
 

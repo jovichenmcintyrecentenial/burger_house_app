@@ -9,10 +9,12 @@ class InputWidget extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
+
+  final Function(String text)? onChangeText;
   const InputWidget({
     super.key, required this.title,
     this.keyboardType,
-    this.obscureText = false, this.controller
+    this.obscureText = false, this.controller, this.onChangeText
   });
 
   @override
@@ -29,6 +31,7 @@ class InputWidget extends StatelessWidget {
           keyboardType:keyboardType,
           obscureText: obscureText,
           controller: controller,
+          onChanged: onChangeText,
           autofocus: false,
           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
           decoration: InputDecoration(
