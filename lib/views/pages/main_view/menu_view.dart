@@ -1,7 +1,6 @@
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
-import 'package:burger_house/views/widgets/grid_view.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class MenuView extends StatelessWidget {
                         const SizedBox(height:10),
                         const InputWidget(title:'Search your cravings'),
 
-                        GirdView()
+                        // GirdView()
                       ],
                     ),
                   ),

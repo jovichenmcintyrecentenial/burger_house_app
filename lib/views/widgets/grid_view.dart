@@ -1,4 +1,5 @@
-import 'package:burger_house/models/menu_food.dart';
+import 'package:burger_house/data/models/response_model/menu_item.dart';
+import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:flutter/material.dart';
@@ -8,23 +9,31 @@ import '../../../utils/constants.dart';
 
 
 class GirdView extends StatelessWidget {
+
+  final MenuItemBaseProvider provider;
+
   GirdView({
-    super.key,
+    super.key,required this.provider
   });
 
-  final List<MenuItem> items = [
-    MenuItem(image: Images.burger1,name: 'Burger Classic',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger2,name: 'Burger Supreme',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger3,name: 'HOUSE Double',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger4,name: 'BH Single',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger5,name: 'Bacon Deluxe',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger5, name: 'HOUSE Triple',calories: 600,price: 7.99),
-    MenuItem(image: Images.burger1,name: 'XXX Classic',calories: 600,price: 7.99),
-  ];
+  // final List<MenuItem> items = [
+  //   MenuItem(imageUrl: Images.burger1,name: 'Burger Classic',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger2,name: 'Burger Supreme',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger3,name: 'HOUSE Double',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger4,name: 'BH Single',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger5,name: 'Bacon Deluxe',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger5, name: 'HOUSE Triple',calories: 600,price: 7.99),
+  //   MenuItem(imageUrl: Images.burger1,name: 'XXX Classic',calories: 600,price: 7.99),
+  // ];
 
-  List<Widget> buildGrids(){
+  List<Widget> buildGrids(MenuItemBaseProvider provider){
+
+    if(provider.menuItems == null){
+      return [Center(child: CircularProgressIndicator())];
+    }
     List<Widget> gridRows = [];
     var index = 1;
+    var items = provider.menuItems!;
     for(var _ in items){
       if(index % 2 == 0 && index != 0){
         gridRows.add(GridRow(items[index-2],items[index-1]));
@@ -40,10 +49,10 @@ class GirdView extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     return Column(
       children:  [
-        ...buildGrids(),
+        ...buildGrids(provider),
         const SizedBox(height: 150,)
       ],);
   }
@@ -104,9 +113,9 @@ class GridItem extends StatelessWidget {
               const SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: GenericImagehandler(menu.image,width: double.infinity,),
+                child: GenericImagehandler(menu.imageUrl,width: double.infinity,height: 130,),
               ),
-              AutoTextSizeWidget(menu.name,fontWeight: FontWeight.w600,fontSize: 16,),
+              AutoTextSizeWidget(menu.name!,fontWeight: FontWeight.w600,fontSize: 16,),
               const SizedBox(height:5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +124,7 @@ class GridItem extends StatelessWidget {
                   const SizedBox(width: 5,),
                   AutoTextSizeWidget('\$${menu.price}',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86),),
                   const SizedBox(width: 10,),
-                  AutoTextSizeWidget('${menu.calories}Cals',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86)),
+                  AutoTextSizeWidget('${menu.calories} Cals',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86)),
                 ],
               )
 

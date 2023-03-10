@@ -1,4 +1,5 @@
 import 'package:burger_house/data/repositories/authenication_repo.dart';
+import 'package:burger_house/data/repositories/menu_repo.dart';
 import 'package:burger_house/data/repositories/user_repo.dart';
 import 'package:burger_house/utils/env.dart';
 import 'package:get_it/get_it.dart';
@@ -18,6 +19,11 @@ class RepositoryRegistry {
           UserRepo(
               dioClient.getClient(),
               baseUrl: Env.get(EnvKey.BASE_URL)!));
+      locator.registerLazySingleton<MenuRepo>(() =>
+          MenuRepo(
+              dioClient.getClient(),
+              baseUrl: Env.get(EnvKey.BASE_URL)!));
+
 
       locator.registerLazySingleton<DioClient>(() => dioClient);
 
