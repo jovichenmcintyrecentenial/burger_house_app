@@ -1,3 +1,4 @@
+import 'package:burger_house/models/cart.dart';
 import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:get_it/get_it.dart';
 import '../data/repository_registry.dart';
@@ -16,6 +17,7 @@ class ServiceLocator {
 
 
     locator.registerLazySingleton<LocalStorage>(() => localStorage);
+    locator.registerLazySingleton<Cart>(() => Cart());
     locator.registerLazySingleton<GlobalNotificationService>(() => GlobalNotificationService());
     locator.registerLazySingleton<SecureStore>(() => SecureStore.init());
     locator.registerLazySingleton<FlutterLibphonenumber>(() => initFuture);

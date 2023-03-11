@@ -1,4 +1,5 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
+import 'package:burger_house/models/cart.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:burger_house/theme/app_theme.dart';
 
 import '../../../utils/constants.dart';
+import '../../services/service_locator.dart';
 import '../../utils/helper.dart';
 import 'cart_button.dart';
 class MenuItemBottomSheet extends StatelessWidget {
@@ -19,6 +21,7 @@ class MenuItemBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -60,9 +63,7 @@ class MenuItemBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoTextSizeWidget('\$${menu.price!}',fontWeight: FontWeight.w700,fontSize: 32,),
-                StepperWidget((int count){
-
-                }),
+                StepperWidget(menu),
                 CartButton()
               ],
             ),
@@ -75,10 +76,11 @@ class MenuItemBottomSheet extends StatelessWidget {
 }
 
 class StepperWidget extends StatefulWidget {
-  final Function(int) onChange;
-  final int? initialValue;
-  const StepperWidget(this.onChange, {
-    super.key,  this.initialValue,
+
+
+  final MenuItem menuItem;
+  const StepperWidget(this.menuItem, {
+    super.key,
   });
 
   @override
@@ -86,13 +88,14 @@ class StepperWidget extends StatefulWidget {
 }
 
 class _StepperWidgetState extends State<StepperWidget> {
+  final cart = ServiceLocator.locator<Cart>();
 
   int count = 0;
 
   @override
   void initState() {
     super.initState();
-    count = widget.initialValue ?? 0;
+    count = cart.getAddedMenuItems(widget.menuItem);
   }
 
   @override
@@ -134,12 +137,15 @@ class _StepperWidgetState extends State<StepperWidget> {
       count = 0;
     }
     else{
+      cart.removeItem(widget.menuItem);
       setState(() {});
     }
   }
 
   increment() {
     count++;
+    cart.addItem(widget.menuItem);
+
     setState(() {
 
     });
