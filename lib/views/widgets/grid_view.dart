@@ -2,8 +2,6 @@ import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
-import 'package:burger_house/views/widgets/subtitle_widget.dart';
-import 'package:burger_house/views/widgets/title_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:burger_house/theme/app_theme.dart';
 
