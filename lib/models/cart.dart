@@ -1,13 +1,26 @@
+import 'dart:convert';
+
 import 'package:burger_house/data/models/response_model/menu_item.dart';
+import 'package:burger_house/services/service_locator.dart';
+import 'package:burger_house/utils/local_storage.dart';
 
 class Cart {
+  var _localStorage = ServiceLocator.locator<LocalStorage>();
+  List<MenuItem> get items {
+    var json = _localStorage.retrieve(LSKey.CART);
+    if(json == null) return [];
+    return menuItemFromJson(json);
+  }
 
-  List<MenuItem> items = [];
+  set items(List<MenuItem> its){
+    _localStorage.save(LSKey.CART,menuItemToJson(its));
+  }
 
   void removeItem(MenuItem menuItem){
         var index = 0;
         var findMatch = false;
-        for(var item in items){
+        var tempItems = items;
+        for(var item in tempItems){
           if(item.id == menuItem.id){
             findMatch = true;
             break;
@@ -15,8 +28,9 @@ class Cart {
           index++;
         }
         if(findMatch ) {
-          items.removeAt(index);
+          tempItems.removeAt(index);
         }
+        items = tempItems;
   }
 
   int getAddedMenuItems(MenuItem menuItem){
@@ -29,8 +43,14 @@ class Cart {
       return counter;
   }
 
+  void clearCart(){
+    items = [];
+  }
+
   void addItem(MenuItem menuItem){
-    items.add(menuItem);
+    var tempItems = items;
+    tempItems.add(menuItem);
+    items = tempItems;
   }
 
   static createOrderRequest(){

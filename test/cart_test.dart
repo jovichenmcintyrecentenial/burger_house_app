@@ -1,19 +1,30 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/models/cart.dart';
+import 'package:burger_house/services/service_locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() async {
-
+  //init depcency finder service
+  await ServiceLocator.register();
   group('Test functionality of cart', () {
+
+
+    test('Empty Cart ', () {
+      var cart = Cart();
+      cart.clearCart();
+      expect(cart.items.length,0 );
+    });
 
     test('Add 1 item to cart', () {
       var cart = Cart();
+      cart.clearCart();
       cart.addItem(MenuItem(id: 'A burger1'));
       expect(cart.items.length,1 );
     });
 
     test('Add 2 item to cart', () {
       var cart = Cart();
+      cart.clearCart();
       cart.addItem(MenuItem(id: 'A burger2'));
       cart.addItem(MenuItem(id: 'A burger2'));
 
@@ -23,6 +34,8 @@ void main() async {
     test('Try to remove item that isn\'t in cart', () {
 
       var cart = Cart();
+      cart.clearCart();
+
       cart.addItem(MenuItem(id: 'A burger2'));
 
       cart.removeItem(MenuItem(id: 'A burger'));
@@ -32,6 +45,8 @@ void main() async {
 
     test('Remove second item to cart', () {
       var cart = Cart();
+      cart.clearCart();
+
       cart.addItem(MenuItem(id: 'A burger1'));
       cart.addItem(MenuItem(id: 'A burger2'));
 
@@ -43,6 +58,8 @@ void main() async {
 
     test('Remove all item from cart', () {
       var cart = Cart();
+      cart.clearCart();
+
       cart.addItem(MenuItem(id: 'A burger1'));
       cart.addItem(MenuItem(id: 'A burger2'));
       cart.addItem(MenuItem(id: 'A burger3'));
@@ -56,6 +73,8 @@ void main() async {
 
     test('get count of number of item added for a specific menu item', () {
       var cart = Cart();
+      cart.clearCart();
+
       cart.addItem(MenuItem(id: 'A burger1'));
       cart.addItem(MenuItem(id: 'A burger2'));
       cart.addItem(MenuItem(id: 'A burger1'));
