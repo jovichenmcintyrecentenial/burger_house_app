@@ -7,6 +7,7 @@ class InputWidget extends StatelessWidget {
 
   final String title;
   final bool obscureText;
+  final bool autoFocus;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
 
@@ -14,8 +15,10 @@ class InputWidget extends StatelessWidget {
   const InputWidget({
     super.key, required this.title,
     this.keyboardType,
-    this.obscureText = false, this.controller, this.onChangeText
-  });
+      this.obscureText = false,
+      this.controller,
+      this.onChangeText,
+      this.autoFocus = false});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class InputWidget extends StatelessWidget {
           obscureText: obscureText,
           controller: controller,
           onChanged: onChangeText,
-          autofocus: false,
+          autofocus: autoFocus,
           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
           decoration: InputDecoration(
               label: AutoTextSizeWidget(

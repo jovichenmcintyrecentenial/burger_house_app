@@ -32,6 +32,13 @@ class Images {
   static var burger4 = '${assetImage}buger_4.png';
   static var burger5 = '${assetImage}buger_5.png';
 
+  static var cartButtonIcon = '${assetImage}cart_button.svg';
+  static var clockIcon = '${assetImage}clock.svg';
+  static var flameIcon = '${assetImage}flame.svg';
+
+  static var addIcon = '${assetImage}add.svg';
+  static var minusIcon = '${assetImage}minus.svg';
+
 
 }
 

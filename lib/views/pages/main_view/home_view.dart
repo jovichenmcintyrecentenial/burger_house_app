@@ -54,6 +54,7 @@ class HomeView extends StatelessWidget {
                         builder: (context,provider, snapshot) {
                           return InputWidget(
                               title: 'Search your cravings',
+                              autoFocus:false,
                               onChangeText: provider
                                   .onChangeSearch);
                         }

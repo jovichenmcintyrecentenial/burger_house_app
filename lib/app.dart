@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 onGenerateRoute: AppRoutes.router.generator,
                 navigatorKey: AppRoutes.navigatorState,
-
                 title: 'Flutter Demo',
                 theme:ThemeData(
                   fontFamily: themeProvider.theme.defaultFont

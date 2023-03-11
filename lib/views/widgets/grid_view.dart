@@ -2,10 +2,14 @@ import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
+import 'package:burger_house/views/widgets/subtitle_widget.dart';
+import 'package:burger_house/views/widgets/title_header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:burger_house/theme/app_theme.dart';
 
 import '../../../utils/constants.dart';
+import '../../utils/helper.dart';
+import 'menu_item_bottom_sheet.dart';
 
 
 class GirdView extends StatelessWidget {
@@ -99,45 +103,61 @@ class GridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = 220;
-    return SizedBox(
-      height: height,
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: height/1.4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0),
-                color: AppTheme.of(context).primaryColorLight,
+    return GestureDetector(
+      onTap: (){
+        Helper.hideKeyboard(context);
+        showModalBottomSheet<void>(
+          context: context,
+          isDismissible: true,
+          isScrollControlled:true,
+          backgroundColor: Colors.transparent,
+          builder: (BuildContext context) {
+            return MenuItemBottomSheet(menu: menu);
+          },
+        );
+
+      },
+      child: SizedBox(
+        height: height,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: height/1.4,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: AppTheme.of(context).primaryColorLight,
+                ),
               ),
             ),
-          ),
-          Column(
-            children: [
-              const SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: GenericImagehandler(menu.imageUrl,width: double.infinity,height: 130,),
-              ),
-              SizedBox(height: isType?10:0,),
-              AutoTextSizeWidget(isType?menu.type!:menu.name!,fontWeight: FontWeight.w600,fontSize: 16,),
-              const SizedBox(height:5),
-              !isType?Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GenericImagehandler(Images.starIcon,width: 20,),
-                  const SizedBox(width: 5,),
-                  AutoTextSizeWidget('\$${menu.price}',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86),),
-                  const SizedBox(width: 10,),
-                  AutoTextSizeWidget('${menu.calories} Cals',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86)),
-                ],
-              ):SizedBox()
+            Column(
+              children: [
+                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: GenericImagehandler(menu.imageUrl,width: double.infinity,height: 130,),
+                ),
+                SizedBox(height: isType?10:0,),
+                AutoTextSizeWidget(isType?menu.type!:menu.name!,fontWeight: FontWeight.w600,fontSize: 16,),
+                const SizedBox(height:5),
+                !isType?Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GenericImagehandler(Images.starIcon,width: 20,),
+                    const SizedBox(width: 5,),
+                    AutoTextSizeWidget('\$${menu.price}',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86),),
+                    const SizedBox(width: 10,),
+                    AutoTextSizeWidget('${menu.calories} Cals',fontWeight: FontWeight.w600,color: const Color(0xff7A7D86)),
+                  ],
+                ):SizedBox()
 
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
+
