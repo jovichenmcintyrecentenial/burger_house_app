@@ -33,49 +33,14 @@ class CartView extends StatelessWidget {
                   return provider.isLoading?
                   Center(child: CircularProgressIndicator()):
                   ListView.builder(
-                    itemCount: ServiceLocator.locator<Cart>().items.length,
+                    itemCount: provider.getCartItems().length,
                     itemBuilder: (BuildContext context, int index)  {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AppTheme.of(context).primaryColorLight),
-                        width: double.infinity,
-                          child: Row(
-                            children: [
-                              GenericImagehandler(
-                                Images.menu,
-                                width: 50,
-                                height: 50,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AutoTextSizeWidget(provider.cart.items[index].name!),
-                                    AutoTextSizeWidget(provider.cart.items[index].type!),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AutoTextSizeWidget(
-                                          '\$' +
-                                              provider.cart.items[index].price!
-                                                  .toString(),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                        Transform.scale(
-                                            scale: 0.8,
-                                            child: StepperWidget(
-                                                provider.cart.items[index])),
-                                        GenericImagehandler(Images.cartButtonIcon)
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                      return Column(
+                        children: [
+                          CartListItem(index),
+                          SizedBox(height: 20,)
+                        ],
+                      );
                     },
                   );
                 }
@@ -85,6 +50,67 @@ class CartView extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class CartListItem extends StatelessWidget {
+  final int index;
+
+  const CartListItem( this.index,{
+    super.key,
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var provider = Provider.of<CartViewProvider>(context);
+    var menuItem = provider.getCartItems()[index];
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20,),
+      padding: EdgeInsets.only(right: 20,left: 15,top: 12),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: AppTheme.of(context).primaryColorLight),
+      width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GenericImagehandler(
+              menuItem.imageUrl,
+              width: 120,
+              height: 120,
+            ),
+            SizedBox(width: 5,),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoTextSizeWidget(menuItem.name!,fontSize: 20,fontWeight: FontWeight.w700,),
+                  AutoTextSizeWidget(menuItem.type!,height:1.2,fontSize: 15,fontWeight: FontWeight.w500, color: Color(0xff7A7D86),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AutoTextSizeWidget(
+                        '\$' +
+                            menuItem.price!
+                                .toString(),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      Transform.scale(
+                          scale: 0.8,
+                          child: StepperWidget(
+                              menuItem)),
+                      GenericImagehandler(Images.cartButtonIcon)
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
   }
 }
 

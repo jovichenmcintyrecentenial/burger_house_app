@@ -20,6 +20,19 @@ class CartViewProvider extends SegueNotifierViewProvider{
     estimateFees();
   }
 
+  List<MenuItem>  getCartItems(){
+    List<MenuItem> menu = [];
+    Map<String,bool> existMap = {};
+
+    for(var item in cart.items){
+      if(!existMap.containsKey(item.id)){
+        menu.add(item);
+        existMap[item.id!] = true;
+      }
+    }
+    return menu;
+  }
+
   Future<void> estimateFees() async {
     var orderRequest = OrderRequest();
     orderRequest.estimate = true;
