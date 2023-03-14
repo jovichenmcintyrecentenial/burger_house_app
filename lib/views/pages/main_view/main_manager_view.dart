@@ -1,3 +1,4 @@
+import 'package:burger_house/views/pages/main_view/cart_view.dart';
 import 'package:burger_house/views/pages/main_view/home_view.dart';
 import 'package:burger_house/views/pages/main_view/orders_view.dart';
 import 'package:burger_house/views/pages/main_view/profile_view.dart';
@@ -48,7 +49,7 @@ class MainManagerView extends StatelessWidget {
                               HomeView(isKeyboardVisble:isVisible),
                               MenuView(),
                               OrdersView(),
-                              ProfileView(),
+                              CartView(),
                             ],
                           ),
                         ),

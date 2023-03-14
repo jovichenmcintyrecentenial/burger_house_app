@@ -43,6 +43,13 @@ class Cart {
       return counter;
   }
 
+  void clearCartOfMenuItem(MenuItem menuItem){
+    var tempItems = items;
+    tempItems.removeWhere((MenuItem menu) => menu.id == menuItem.id);
+    items = tempItems;
+  }
+
+
   void clearCart(){
     items = [];
   }

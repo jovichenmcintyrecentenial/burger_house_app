@@ -82,5 +82,18 @@ void main() async {
       expect(cart.getAddedMenuItems(MenuItem(id: 'A burger1')),2 );
     });
 
+    test('remove all menu item type from cart', () {
+      var cart = Cart();
+      cart.clearCart();
+
+      cart.addItem(MenuItem(id: 'A burger1'));
+      cart.addItem(MenuItem(id: 'A burger2'));
+      cart.addItem(MenuItem(id: 'A burger1'));
+
+      cart.clearCartOfMenuItem(MenuItem(id: 'A burger1'));
+
+      expect(cart.items.length,1 );
+    });
+
   });
 }
