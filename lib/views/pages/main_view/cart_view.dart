@@ -1,13 +1,9 @@
-import 'package:burger_house/models/cart.dart';
-import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/theme/app_theme.dart';
-import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/main_view/providers/cart_view_provider.dart';
 import 'package:burger_house/views/widgets/app_bars/title_app_bar_widget.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/menu_item_bottom_sheet.dart';
-import 'package:burger_house/views/widgets/order_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +34,7 @@ class CartView extends StatelessWidget {
                       return Column(
                         children: [
                           CartListItem(index),
-                          SizedBox(height: 20,)
+                          SizedBox(height: 16,)
                         ],
                       );
                     },

@@ -1,4 +1,5 @@
 import 'package:burger_house/views/pages/main_view/main_manager_view.dart';
+import 'package:burger_house/views/pages/main_view/menu_type_view.dart';
 import 'package:burger_house/views/pages/sign_in/login_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
@@ -56,6 +57,10 @@ class AppRoutes {
         });
     //DON'T DELETE COMMENT BELOW
     //{{codeGen}}
+    router.define(MenuTypeView.routeName, handler: Handler(handlerFunc: (context,params){
+      final args = context!.settings!.arguments;
+      return MenuTypeView(args: args as String);
+    }));
     router.define(MainManagerView.routeName, handler: Handler(handlerFunc: (context,params){
        final args = context!.settings!.arguments;
        return MainManagerView(args: args);

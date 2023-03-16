@@ -7,6 +7,7 @@ part 'menu_repo.g.dart';
 
 @RestApi()
 abstract class MenuRepo {
+
   factory MenuRepo(Dio dio, {String baseUrl}) = _MenuRepo;
 
   //get user information
@@ -17,6 +18,7 @@ abstract class MenuRepo {
         @Query('popular')  bool? isPopular,
         @Query('types')  bool? types,
         @Query('query')  String? searchQuery,
+        @Query('category')  String? category,
       }
   );
 

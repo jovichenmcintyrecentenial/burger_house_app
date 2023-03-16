@@ -1,4 +1,5 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
+import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
@@ -7,8 +8,8 @@ import 'package:burger_house/theme/app_theme.dart';
 
 import '../../../utils/constants.dart';
 import '../../utils/helper.dart';
+import '../pages/main_view/menu_type_view.dart';
 import 'menu_item_bottom_sheet.dart';
-
 
 class GirdView extends StatelessWidget {
 
@@ -38,13 +39,13 @@ class GirdView extends StatelessWidget {
     var items = provider.menuItems!;
     for(var _ in items){
       if(index % 2 == 0 && index != 0){
-        gridRows.add(GridRow(items[index-2],items[index-1],isType:provider.isType));
+        gridRows.add(GridRow(items[index-2],items[index-1],isType:provider.isType,provider:provider));
       }
       index++;
     }
 
     if(index % 2 == 0){
-      gridRows.add(GridRow(items[index-2],null,isType:provider.isType));
+      gridRows.add(GridRow(items[index-2],null,isType:provider.isType,provider:provider));
     }
 
      return gridRows;
@@ -64,9 +65,11 @@ class GridRow extends StatelessWidget {
   final MenuItem item1;
   final MenuItem? item2;
   final bool isType;
+  final MenuItemBaseProvider provider;
+
 
   const GridRow(this.item1, this.item2, {
-    this.isType = false,
+    this.isType = false, required this.provider,
     super.key,
   });
 
@@ -75,11 +78,11 @@ class GridRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:  [
-        Expanded(child: GridItem(item1,isType: isType,)),
+        Expanded(child: GridItem(item1,isType: isType,provider:provider)),
         const SizedBox(width:20),
         Expanded(
           child: Opacity(opacity:item2 == null? 0.001:1,
-          child: GridItem(item2??item1,isType: isType,)),
+          child: GridItem(item2??item1,isType: isType,provider:provider)),
         ),
       ],
     );
@@ -90,12 +93,11 @@ class GridItem extends StatelessWidget {
 
   final MenuItem menu;
   final bool isType;
-
-
+  final MenuItemBaseProvider provider;
 
   const GridItem(this.menu,{
     super.key,
-    this.isType = false,
+    this.isType = false, required this.provider,
   });
 
   @override
@@ -103,16 +105,23 @@ class GridItem extends StatelessWidget {
     double height = 220;
     return GestureDetector(
       onTap: (){
-        Helper.hideKeyboard(context);
-        showModalBottomSheet<void>(
-          context: context,
-          isDismissible: true,
-          isScrollControlled:true,
-          backgroundColor: Colors.transparent,
-          builder: (BuildContext context) {
-            return MenuItemBottomSheet(menu: menu);
-          },
-        );
+
+        if(provider.isType)
+        {
+          AppRoutes.navigate(context,MenuTypeView.routeName,menu.type);
+        }
+        else {
+          Helper.hideKeyboard(context);
+          showModalBottomSheet<void>(
+            context: context,
+            isDismissible: true,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return MenuItemBottomSheet(menu: menu);
+            },
+          );
+        }
 
       },
       child: SizedBox(

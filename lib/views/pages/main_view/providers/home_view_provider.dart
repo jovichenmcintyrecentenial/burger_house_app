@@ -7,7 +7,7 @@ class HomeViewProvider extends MenuItemBaseProvider{
 
 
  @override
- void initalState(){
+ void initalState({String? category}){
   getMenuItems(isPopular:true);
 
  }

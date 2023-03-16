@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 
 class AppTitleBar extends StatelessWidget {
   final String title;
+  final Color? color;
+  final bool hasLeading;
 
   const AppTitleBar(
       this.title, {
         super.key,
+        this.color, this.hasLeading = true
       });
 
   @override
@@ -19,9 +22,9 @@ class AppTitleBar extends StatelessWidget {
         fontSize: 20,
         fontWeight: FontWeight.w700,
       ),
-      backgroundColor: AppTheme.of(context).primaryColor,
+      backgroundColor:color?? AppTheme.of(context).primaryColor,
       centerTitle: true,
-      leading: SizedBox(),
+      leading: !hasLeading?SizedBox():null,
       elevation: 0,
     );
   }
