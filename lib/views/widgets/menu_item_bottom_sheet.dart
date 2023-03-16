@@ -1,5 +1,6 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/models/cart.dart';
+import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
@@ -64,7 +65,9 @@ class MenuItemBottomSheet extends StatelessWidget {
               children: [
                 AutoTextSizeWidget('\$${menu.price!}',fontWeight: FontWeight.w700,fontSize: 32,),
                 StepperWidget(menu),
-                CartButton()
+                CartButton(onTap:(){
+                  Navigator.pop(context,true);
+                })
               ],
             ),
             SizedBox(height: 60,)

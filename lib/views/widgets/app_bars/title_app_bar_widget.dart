@@ -10,7 +10,7 @@ class AppTitleBar extends StatelessWidget {
   const AppTitleBar(
       this.title, {
         super.key,
-        this.color, this.hasLeading = true
+        this.color, this.hasLeading = false
       });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/route/app_routes.dart';
+import 'package:burger_house/views/pages/main_view/providers/main_manager_view_provider.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
@@ -104,7 +105,7 @@ class GridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = 220;
     return GestureDetector(
-      onTap: (){
+      onTap: () async {
 
         if(provider.isType)
         {
@@ -112,7 +113,7 @@ class GridItem extends StatelessWidget {
         }
         else {
           Helper.hideKeyboard(context);
-          showModalBottomSheet<void>(
+          var cartButtonPressed = await showModalBottomSheet<bool>(
             context: context,
             isDismissible: true,
             isScrollControlled: true,
@@ -121,6 +122,13 @@ class GridItem extends StatelessWidget {
               return MenuItemBottomSheet(menu: menu);
             },
           );
+
+          if(cartButtonPressed != null && cartButtonPressed){
+            MainManagerProvider.stream.add(3);
+            if(provider.isCategory){
+              Navigator.pop(context);
+            }
+          }
         }
 
       },
