@@ -2,6 +2,7 @@ import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/models/cart.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
+import 'package:burger_house/views/widgets/stream_listner_widget.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:burger_house/views/widgets/title_header_widget.dart';
 import 'package:flutter/material.dart';
@@ -142,6 +143,8 @@ class _StepperWidgetState extends State<StepperWidget> {
       cart.removeItem(widget.menuItem);
       setState(() {});
     }
+    StreamListeningWidget.trigger(StreamObject(name: Strings.cartUpdate, object: true));
+
   }
 
   increment() {
@@ -151,6 +154,8 @@ class _StepperWidgetState extends State<StepperWidget> {
     setState(() {
 
     });
+    StreamListeningWidget.trigger(StreamObject(name: Strings.cartUpdate, object: true));
+
   }
 }
 

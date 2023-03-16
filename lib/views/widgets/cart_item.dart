@@ -7,6 +7,7 @@ import 'package:burger_house/views/pages/main_view/providers/cart_view_provider.
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/menu_item_bottom_sheet.dart';
+import 'package:burger_house/views/widgets/stream_listner_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -90,8 +91,9 @@ class _DeleteItemButton extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         final cart = ServiceLocator.locator<Cart>();
-        cart.removeItem(menuItem);
-
+        cart.clearCartOfMenuItem(menuItem);
+        StreamListeningWidget.trigger(StreamObject(name: Strings.cartUpdate, object: true));
+        StreamListeningWidget.trigger(StreamObject(name: Strings.cartItemDelete, object: true));
       },
       child: Container(
           height: 40,

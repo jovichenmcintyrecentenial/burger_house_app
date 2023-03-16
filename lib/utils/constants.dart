@@ -51,6 +51,10 @@ class FontFamily {
 class Strings {
   static String failure = 'failure';
 
+  static var cartUpdate = 'cartUpdate';
+
+  static var cartItemDelete = 'cartItemDelete';
+
 
 }
 

@@ -24,6 +24,28 @@ class StreamListeningWidget <T> extends StatefulWidget{
     StreamListeningSetTypeWidget.stream.add(object);
   }
 
+  static void listen<T>(
+      {
+        required String streamName,
+        required bool Function() isDisposed,
+        required Function(dynamic) onTrigger
+      }) {
+    var subscriber;
+
+    subscriber = StreamListeningSetTypeWidget.stream.stream.listen((dynamic action) {
+      if(action is StreamObject){
+        if (isDisposed()) {
+          subscriber.cancel();
+          return;
+        }
+        if(action.name == streamName){
+          onTrigger(action.object);
+        }
+      }
+
+    });
+  }
+
   @override
   State<StreamListeningWidget<T>> createState() => _StreamListeningWidgetState<T>();
 }
@@ -47,6 +69,8 @@ class StreamListeningSetTypeWidget <T,K> extends StatefulWidget {
   static void trigger(StreamObject object){
     StreamListeningSetTypeWidget.stream.add(object);
   }
+
+
 
   const StreamListeningSetTypeWidget(
       {Key? key, required this.streamName, @required this.builder, this.defaultValue})

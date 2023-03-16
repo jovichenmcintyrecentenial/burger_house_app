@@ -7,7 +7,9 @@ import 'package:burger_house/models/segue_model/segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/utils/cache_helper.dart';
+import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/views/widgets/stream_listner_widget.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CartViewProvider extends SegueNotifierViewProvider{
@@ -16,8 +18,16 @@ class CartViewProvider extends SegueNotifierViewProvider{
 
   var cart = ServiceLocator.locator<Cart>();
 
-  CartViewProvider(){
+  CartViewProvider() {
     estimateFees();
+    StreamListeningWidget.listen<bool>(
+      streamName: Strings.cartItemDelete,
+      isDisposed: () => isDisposed,
+      onTrigger: (streamObject) {
+        notifyListenersSafe();
+      },
+
+    );
   }
 
   List<MenuItem>  getCartItems(){
