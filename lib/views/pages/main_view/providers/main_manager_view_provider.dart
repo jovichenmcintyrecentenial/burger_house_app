@@ -17,7 +17,12 @@ class MainManagerProvider extends SegueNotifierViewProvider{
         _subscriber.cancel();
         return;
       }
-      controller.jumpToPage(action);
+      if(controller.hasClients) {
+        controller.jumpToPage(action);
+      }
+      else{
+        _subscriber.cancel();
+      }
 
     });
 

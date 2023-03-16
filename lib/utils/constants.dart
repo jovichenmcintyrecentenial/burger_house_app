@@ -39,6 +39,7 @@ class Images {
   static var addIcon = '${assetImage}add.svg';
   static var trashIcon = '${assetImage}trash.svg';
   static var minusIcon = '${assetImage}minus.svg';
+  static var emptyCartIcon = '${assetImage}empty_cart_icon.png';
 
 
 }

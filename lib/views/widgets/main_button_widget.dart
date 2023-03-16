@@ -25,6 +25,13 @@ class MainButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.of(context).accentColor,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: [ BoxShadow(
+            color: Colors.black.withOpacity(0.2), // background color
+            spreadRadius: 3,
+            blurRadius: 4.0,
+            offset: -Offset(-1,-5),
+
+          ),],
         ),
         child: Center(
           child: AutoTextSizeWidget(
