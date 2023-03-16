@@ -19,6 +19,7 @@ class MainManagerProvider extends SegueNotifierViewProvider{
       }
       if(controller.hasClients) {
         controller.jumpToPage(action);
+        notifyListenersSafe();
       }
       else{
         _subscriber.cancel();

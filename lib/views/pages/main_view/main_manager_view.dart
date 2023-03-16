@@ -54,8 +54,16 @@ class MainManagerView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    !isVisible?Align(alignment:Alignment.bottomCenter,child: NavBar(provider.controller)):SizedBox()
-                  ],
+                  !isVisible
+                      ? Consumer<MainManagerProvider>(
+                        builder: (context, provider, snapshot) {
+                          return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: NavBar(provider.controller));
+                        }
+                      )
+                      : SizedBox()
+                ],
                 );
               }
             ),
