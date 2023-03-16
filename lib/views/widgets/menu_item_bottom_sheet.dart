@@ -1,6 +1,5 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/models/cart.dart';
-import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/subtitle_widget.dart';
@@ -82,8 +81,10 @@ class StepperWidget extends StatefulWidget {
 
 
   final MenuItem menuItem;
+
+  final bool smallerFonts ;
   const StepperWidget(this.menuItem, {
-    super.key,
+    this.smallerFonts = false
   });
 
   @override
@@ -116,18 +117,16 @@ class _StepperWidgetState extends State<StepperWidget> {
             ),
           ),
         ),
-        AutoTextSizeWidget('$count',fontWeight: FontWeight.w500,fontSize: 32,),
+        AutoTextSizeWidget('$count',fontWeight: FontWeight.w500,fontSize: widget.smallerFonts?25:32,),
         GestureDetector(
           onTap: ()=>increment(),
           child: Container(
             color: Colors.black.withOpacity(0.01),
-
             height: 50,
             width: 50,
             child: Center(
               child: GenericImagehandler(Images.addIcon,width: 18,height: 18,),
             ),
-
           ),
         ),
       ],

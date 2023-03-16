@@ -37,6 +37,7 @@ class Images {
   static var flameIcon = '${assetImage}flame.svg';
 
   static var addIcon = '${assetImage}add.svg';
+  static var trashIcon = '${assetImage}trash.svg';
   static var minusIcon = '${assetImage}minus.svg';
 
 
