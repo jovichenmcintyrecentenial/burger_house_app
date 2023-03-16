@@ -95,5 +95,23 @@ void main() async {
       expect(cart.items.length,1 );
     });
 
+
+    test('get total for all menu items in cart', () {
+      var cart = Cart();
+      cart.clearCart();
+
+      cart.addItem(MenuItem(id: 'A burger1',price: 1));
+      cart.addItem(MenuItem(id: 'A burger1',price: 1.5));
+      cart.addItem(MenuItem(id: 'A burger1',price: 1.5));
+
+
+      expect(cart.getTotal(),4.0 );
+    });
+
+    test('get total when cart empty', () {
+      var cart = Cart();
+      cart.clearCart();
+      expect(cart.getTotal(),0 );
+    });
   });
 }

@@ -41,6 +41,15 @@ class Cart {
       return counter;
   }
 
+  double getTotal(){
+    double total = 0.0;
+    for(var item in items){
+      total += item.price!;
+    }
+    return total;
+  }
+
+
   void clearCartOfMenuItem(MenuItem menuItem){
     var tempItems = items;
     tempItems.removeWhere((MenuItem menu) => menu.id == menuItem.id);
