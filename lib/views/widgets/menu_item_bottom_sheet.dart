@@ -85,7 +85,8 @@ class StepperWidget extends StatefulWidget {
 
   final bool smallerFonts ;
   const StepperWidget(this.menuItem, {
-    this.smallerFonts = false
+    this.smallerFonts = false,
+    super.key
   });
 
   @override

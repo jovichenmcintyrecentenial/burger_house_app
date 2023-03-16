@@ -63,12 +63,20 @@ class CartListItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AutoTextSizeWidget(
-                      '\$' + menuItem.price!.toString(),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                    Flexible(
+                      child: AutoTextSizeWidget(
+                        '\$' + menuItem.price!.toString(),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                    Transform.scale(scale: 0.8, child: StepperWidget(menuItem,smallerFonts: true,)),
+                    Transform.scale(
+                        scale: 0.8,
+                        child: StepperWidget(
+                          key:GlobalKey(),
+                          menuItem,
+                          smallerFonts: true,
+                        )),
                     _DeleteItemButton(menuItem)
                   ],
                 )
