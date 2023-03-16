@@ -1,5 +1,6 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/services/service_locator.dart';
+import 'package:burger_house/utils/formatters/number_formtter.dart';
 import 'package:burger_house/utils/local_storage.dart';
 
 class Cart {
@@ -48,6 +49,12 @@ class Cart {
     }
     return total;
   }
+
+  String getTotalFormatted(){
+
+    return NumberFormatter.format(amount: getTotal().toString(),dp: 2);
+  }
+
 
 
   void clearCartOfMenuItem(MenuItem menuItem){

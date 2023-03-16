@@ -7,10 +7,14 @@ class AppTitleBar extends StatelessWidget {
   final Color? color;
   final bool hasLeading;
 
+  final List<Widget>? actions;
+
   const AppTitleBar(
       this.title, {
         super.key,
-        this.color, this.hasLeading = false
+        this.color,
+        this.actions,
+        this.hasLeading = false
       });
 
   @override
@@ -24,6 +28,7 @@ class AppTitleBar extends StatelessWidget {
       ),
       backgroundColor:color?? AppTheme.of(context).primaryColor,
       centerTitle: true,
+      actions: actions??[],
       leading: !hasLeading?SizedBox():null,
       elevation: 0,
     );

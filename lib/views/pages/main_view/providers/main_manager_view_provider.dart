@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 
 
 class MainManagerProvider extends SegueNotifierViewProvider{
-  static final StreamController<int> stream = StreamController<int>();
+  static final StreamController<int> stream = StreamController<int>.broadcast();
   dynamic _subscriber;
   final PageController controller = PageController();
 
