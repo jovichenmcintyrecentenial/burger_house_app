@@ -4,8 +4,6 @@ import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_type_view_provider.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/grid_view.dart';
-import 'package:burger_house/views/widgets/input_widget.dart';
-import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';

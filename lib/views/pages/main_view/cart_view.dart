@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/constants.dart';
-import '../../widgets/title_header_widget.dart';
 
 class CartView extends StatelessWidget {
   CartView({

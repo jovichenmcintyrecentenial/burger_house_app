@@ -6,7 +6,6 @@ import 'package:burger_house/utils/env.dart';
 import 'package:get_it/get_it.dart';
 
 import 'http/dio_client.dart';
-import 'models/response_model/order_response_model.dart';
 
 class RepositoryRegistry {
   DioClient dioClient = DioClient();

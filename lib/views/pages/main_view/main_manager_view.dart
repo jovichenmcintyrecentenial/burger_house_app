@@ -1,7 +1,6 @@
 import 'package:burger_house/views/pages/main_view/cart_view.dart';
 import 'package:burger_house/views/pages/main_view/home_view.dart';
 import 'package:burger_house/views/pages/main_view/orders_view.dart';
-import 'package:burger_house/views/pages/main_view/profile_view.dart';
 import 'package:burger_house/views/widgets/keyboard_visibility_builder.dart';
 import 'package:burger_house/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
