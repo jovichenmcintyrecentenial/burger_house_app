@@ -24,7 +24,7 @@ class MainButtonWidget extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppTheme.of(context).accentColor,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(25),
           boxShadow: [ BoxShadow(
             color: Colors.black.withOpacity(0.2), // background color
             spreadRadius: 3,

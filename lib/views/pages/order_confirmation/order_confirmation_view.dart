@@ -4,9 +4,12 @@ import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/providers/order_confirmation_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
-import 'package:burger_house/views/widgets/generic_Image_handler.dart';
+import 'package:burger_house/views/widgets/edit_app_button.dart';
 import 'package:burger_house/views/widgets/grid_view.dart';
+import 'package:burger_house/views/widgets/horizontal_divider.dart';
+import 'package:burger_house/views/widgets/main_button_widget.dart';
 import 'package:burger_house/views/widgets/scaffolds/scaffold_main_app_bar.dart';
+import 'package:burger_house/views/widgets/user_checkout_tile_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,108 +30,109 @@ class OrderConfirmationView extends StatelessWidget {
     return ChangeNotifierProvider<OrderConfirmationViewProvider> (
         create: (_) => OrderConfirmationViewProvider(),
         builder: (context, snapshot) {
+          var label = 'Delivery Fee';
+          var data = 'heelle';
           return ScaffoldMainAppBar(
             title: 'My Order',
-            actions: [EditButtonWidget()],
+            actions: [EditAppBarButtonWidget()],
             backgroundColor: AppTheme.of(context).primaryColor,
-            body: Column(
-              children: [
-                _HorizontalMenuItemList(scale: scale),
-                SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      UserCheckoutTitleItem(
-                        image: Images.mapPinIcon,
-                        title: 'Your Delivery Address',
-                        data: 'Tap here to select an address',
-                      ),
-                      SizedBox(height: 15,),
-                      UserCheckoutTitleItem(
-                        image: Images.cardIcon,
-                        title: 'Payment Method',
-                        data: 'Tap here to select an address',
-                      ),
-                    ],
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  _HorizontalMenuItemList(scale: scale),
+                  SizedBox(height: 20,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        UserCheckoutTitleItem(
+                          image: Images.mapPinIcon,
+                          title: 'Your Delivery Address',
+                          data: 'Tap here to select an address',
+                        ),
+                        SizedBox(height: 15,),
+                        UserCheckoutTitleItem(
+                          image: Images.cardIcon,
+                          title: 'Payment Method',
+                          data: 'Tap here to select an address',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 20,),
+                  SizedBox(height: 20,),
+                  buildFeeSection(context, label, data),
+                  SizedBox(height: 20,),
 
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: MainButtonWidget('Place Order', onTap: (){},),
+                  )
+                ],
+              ),
             ),
           );
         }
     );
   }
-}
 
-class UserCheckoutTitleItem extends StatelessWidget {
-
-  final String data ;
-  final String title;
-
-  final String image;
-
-  const UserCheckoutTitleItem({
-    super.key, required this.data, required this.title, required this.image,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Flexible(
-      child: Container(
-        padding: EdgeInsets.only(left: 25,right: 5,top: 12,bottom: 18),
-        width: double.infinity,
-          decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(15),
-            color: AppTheme
-                .of(context)
-                .primaryColorLight,),
-          child: Row(
-            children: [
-              Expanded(
+  Container buildFeeSection(BuildContext context, String label, String data) {
+    return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppTheme.of(context).primaryColorLight,
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AutoTextSizeWidget(title,color: Color(0xff7A7D86),),
-                    SizedBox(height:1),
-                    Row(
-                    children: [
-                      GenericImagehandler(
-                        image,
-                        width: 18,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        child: Text(
-                          data,
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xffE1E3EB),
-                              overflow: TextOverflow.ellipsis),
-                        ),
-
-                      ),
-                      SizedBox(width: 8,),
-
-                    ],
-                  ),
+                    _RowItemLabelData(label: 'Subtotal', data: '\$10.99'),
+                    _RowItemLabelData(label: label, data: '\$2.99'),
+                    _RowItemLabelData(label: 'Service Fee', data: '\$5.99'),
+                    _RowItemLabelData(label: 'Tax',data: '\$3.99'),
+                    HorizontalDivider(color: Color(0xff3E3839),padding: EdgeInsets.symmetric(vertical: 10,)),
+                    _RowItemLabelData(label: 'Total', data: '\$12.99',isBig: true,),
                   ],
                 ),
-              ),
-              GenericImagehandler(Images.cheronRight,height:12 ,)
-            ],
-          ),
+
+
+              );
+  }
+}
+
+class _RowItemLabelData extends StatelessWidget {
+  final bool isBig;
+
+  const _RowItemLabelData({
+    required this.label,
+    required this.data,
+    this.isBig = false
+  });
+
+  final String label;
+  final String data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Expanded(child:
+          !isBig?AutoTextSizeWidget(label,color: Color(0xff7A7D86),):
+          AutoTextSizeWidget(label,color: Color(0xff7A7D86),fontSize: 19,)),
+          !isBig?AutoTextSizeWidget(data,):
+          AutoTextSizeWidget(data,fontWeight: FontWeight.w700,fontSize: 19,),
+        ],
       ),
     );
   }
 }
+
+
 
 class _HorizontalMenuItemList extends StatelessWidget {
   const _HorizontalMenuItemList({
@@ -153,24 +157,6 @@ class _HorizontalMenuItemList extends StatelessWidget {
             }
           );
         }
-      ),
-    );
-  }
-}
-
-class EditButtonWidget extends StatelessWidget {
-  const EditButtonWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap:()=>Navigator.pop(context),
-      child: Container(
-        color: Colors.red.withOpacity(0.001),
-        padding: const EdgeInsets.only(right: 20,top:20),
-        child: AutoTextSizeWidget('Edit'),
       ),
     );
   }
