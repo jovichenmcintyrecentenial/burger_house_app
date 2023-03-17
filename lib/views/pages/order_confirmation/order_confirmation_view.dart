@@ -30,10 +30,8 @@ class OrderConfirmationView extends StatelessWidget {
     return ChangeNotifierProvider<OrderConfirmationViewProvider> (
         create: (_) => OrderConfirmationViewProvider(),
         builder: (context, snapshot) {
-          var label = 'Delivery Fee';
-          var data = 'heelle';
           return ScaffoldMainAppBar(
-            title: 'My Order',
+            title: 'Checkout',
             actions: [EditAppBarButtonWidget()],
             backgroundColor: AppTheme.of(context).primaryColor,
             body: SingleChildScrollView(
@@ -73,7 +71,7 @@ class OrderConfirmationView extends StatelessWidget {
                       ],
                     ):Column(
                       children: [
-                        buildFeeSection(context, label, data),
+                        buildFeeSection(context),
                         SizedBox(height: 20,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -91,7 +89,7 @@ class OrderConfirmationView extends StatelessWidget {
     );
   }
 
-  Container buildFeeSection(BuildContext context, String label, String data) {
+  Container buildFeeSection(BuildContext context) {
 
     var provider = Provider.of<OrderConfirmationViewProvider>(context);
 
