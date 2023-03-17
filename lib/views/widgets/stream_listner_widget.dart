@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:burger_house/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
 
 class StreamObject <T> {
@@ -39,7 +40,9 @@ class StreamListeningWidget <T> extends StatefulWidget{
           return;
         }
         if(action.name == streamName){
+          Helper.logger.e(streamName);
           onTrigger(action.object);
+
         }
       }
 

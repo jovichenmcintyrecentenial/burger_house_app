@@ -50,25 +50,39 @@ class OrderConfirmationView extends StatelessWidget {
                         UserCheckoutTitleItem(
                           image: Images.mapPinIcon,
                           title: 'Your Delivery Address',
-                          data: 'Tap here to select an address',
+                          data: 'Tap here to create an address',
                         ),
                         SizedBox(height: 15,),
                         UserCheckoutTitleItem(
                           image: Images.cardIcon,
                           title: 'Payment Method',
-                          data: 'Tap here to select an address',
+                          data: 'Tap here to add a payment method',
                         ),
                       ],
                     ),
                   ),
                   SizedBox(height: 20,),
-                  buildFeeSection(context, label, data),
-                  SizedBox(height: 20,),
+                  Consumer<OrderConfirmationViewProvider>(
+                      builder: (context, provider, snapshot) {
+                    return  provider.isLoading?Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(height: 100,),
+                        CircularProgressIndicator(),
+                      ],
+                    ):Column(
+                      children: [
+                        buildFeeSection(context, label, data),
+                        SizedBox(height: 20,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: MainButtonWidget('Place Order', onTap: (){},),
+                        )
+                      ],
+                    );
+                  }),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: MainButtonWidget('Place Order', onTap: (){},),
-                  )
                 ],
               ),
             ),
@@ -78,6 +92,9 @@ class OrderConfirmationView extends StatelessWidget {
   }
 
   Container buildFeeSection(BuildContext context, String label, String data) {
+
+    var provider = Provider.of<OrderConfirmationViewProvider>(context);
+
     return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 10),
                 margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -89,12 +106,12 @@ class OrderConfirmationView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _RowItemLabelData(label: 'Subtotal', data: '\$10.99'),
-                    _RowItemLabelData(label: label, data: '\$2.99'),
-                    _RowItemLabelData(label: 'Service Fee', data: '\$5.99'),
-                    _RowItemLabelData(label: 'Tax',data: '\$3.99'),
+                    _RowItemLabelData(label: 'Subtotal', data: '\$${provider.cart.getTotalFormatted()}'),
+                    for(var fee in provider.orderDetails!.fees!)...[
+                      _RowItemLabelData(label: fee.name!, data: '\$${fee.getPriceFormatted()}'),
+                    ],
                     HorizontalDivider(color: Color(0xff3E3839),padding: EdgeInsets.symmetric(vertical: 10,)),
-                    _RowItemLabelData(label: 'Total', data: '\$12.99',isBig: true,),
+                    _RowItemLabelData(label: 'Total', data: '\$${provider.orderDetails!.getTotalFormatted()}',isBig: true,),
                   ],
                 ),
 
