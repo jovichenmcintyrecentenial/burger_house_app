@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:burger_house/data/http/inteceptors/api_token_interceptor.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-// import 'package:path_provider/path_provider.dart' as pp;
 
 import '../../utils/env.dart';
 import 'inteceptors/api_cache_interceptor.dart';
@@ -15,15 +14,14 @@ class DioClient {
   static Future<void> initGetDBPath() async {
   }
 
-
-
-  void initClient() {
+  void initClient({bool needsAuth = true}) {
     if (_dio != null) return;
 
     _dio = Dio();
     _dio!.interceptors.add(ApiCacheInterceptor().interceptorsWrapper);
-    _dio!.interceptors.add(ApiTokenInterceptor().interceptorsWrapper);
-
+    if(needsAuth) {
+      _dio!.interceptors.add(ApiTokenInterceptor().interceptorsWrapper);
+    }
     //proxy
     if (Env.containsKey(EnvKey.PROXY_PORT) &&
         Env.containsKey(EnvKey.PROXY_ADDRESS)) {
@@ -40,8 +38,8 @@ class DioClient {
     }
   }
 
-  Dio getClient() {
-    if (_dio == null) initClient();
+  Dio getClient({bool needsAuth = true}) {
+    if (_dio == null) initClient(needsAuth:needsAuth);
     return _dio!;
   }
 

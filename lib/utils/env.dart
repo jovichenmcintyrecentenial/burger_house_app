@@ -12,7 +12,9 @@ enum EnvKey {
 
   PROXY_PORT,
   PROXY_ADDRESS,
-  BASE_URL
+  BASE_URL,
+  GOOGLE_API_KEY,
+  GOOGLE_API_BASE_URL
 }
 
 class Env {
