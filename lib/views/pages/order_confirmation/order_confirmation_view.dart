@@ -3,6 +3,7 @@ import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/providers/order_confirmation_provider.dart';
+import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/grid_view.dart';
 import 'package:burger_house/views/widgets/scaffolds/scaffold_main_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,8 @@ class OrderConfirmationView extends StatelessWidget {
         create: (_) => OrderConfirmationViewProvider(),
         builder: (context, snapshot) {
           return ScaffoldMainAppBar(
-            title: 'Order Confirmation',
+            title: 'My Order',
+            actions: [EditButtonWidget()],
             backgroundColor: AppTheme.of(context).primaryColor,
             body: Column(
               children: [
@@ -50,6 +52,24 @@ class OrderConfirmationView extends StatelessWidget {
             ),
           );
         }
+    );
+  }
+}
+
+class EditButtonWidget extends StatelessWidget {
+  const EditButtonWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap:()=>Navigator.pop(context),
+      child: Container(
+        color: Colors.red.withOpacity(0.001),
+        padding: const EdgeInsets.only(right: 20,top:20),
+        child: AutoTextSizeWidget('Edit'),
+      ),
     );
   }
 }
