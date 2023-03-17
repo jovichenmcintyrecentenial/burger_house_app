@@ -2,6 +2,8 @@ import 'package:burger_house/models/segue_model/order_segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
+import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/address_bottom_sheet.dart';
 import 'package:burger_house/views/pages/order_confirmation/providers/order_confirmation_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/edit_app_button.dart';
@@ -42,21 +44,41 @@ class OrderConfirmationView extends StatelessWidget {
                   SizedBox(height: 20,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        UserCheckoutTitleItem(
-                          image: Images.mapPinIcon,
-                          title: 'Your Delivery Address',
-                          data: 'Tap here to create an address',
-                        ),
-                        SizedBox(height: 15,),
-                        UserCheckoutTitleItem(
-                          image: Images.cardIcon,
-                          title: 'Payment Method',
-                          data: 'Tap here to add a payment method',
-                        ),
-                      ],
+                    child: Consumer<OrderConfirmationViewProvider>(
+                      builder: (context,provider, snapshot) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            UserCheckoutTitleItem(
+                              image: Images.mapPinIcon,
+                              title: 'Your Delivery Address',
+                              data: 'Tap here to create an address',
+                              onTap: () async {
+                                Helper.hideKeyboard(context);
+                                var isDataUpdated = await showModalBottomSheet<bool>(
+                                  context: context,
+                                  isDismissible: true,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (BuildContext context) {
+                                    return AddressBottomSheet();
+                                  },
+                                );
+
+                                if(isDataUpdated == true){
+                                }
+                              }
+                            ),
+                            SizedBox(height: 15,),
+                            UserCheckoutTitleItem(
+                              onTap: (){},
+                              image: Images.cardIcon,
+                              title: 'Payment Method',
+                              data: 'Tap here to add a payment method',
+                            ),
+                          ],
+                        );
+                      }
                     ),
                   ),
                   SizedBox(height: 20,),

@@ -6,6 +6,7 @@ class AppTitleBar extends StatelessWidget {
   final String title;
   final Color? color;
   final bool hasLeading;
+  final FontWeight? fontWeight;
 
   final List<Widget>? actions;
 
@@ -14,7 +15,7 @@ class AppTitleBar extends StatelessWidget {
         super.key,
         this.color,
         this.actions,
-        this.hasLeading = false
+        this.hasLeading = false, this.fontWeight
       });
 
   @override
@@ -24,7 +25,7 @@ class AppTitleBar extends StatelessWidget {
         title,
         color: Colors.white,
         fontSize: 20,
-        fontWeight: FontWeight.w700,
+        fontWeight:fontWeight?? FontWeight.w700,
       ),
       backgroundColor:color?? AppTheme.of(context).primaryColor,
       centerTitle: true,

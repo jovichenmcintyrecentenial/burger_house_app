@@ -19,6 +19,7 @@ class AppTheme {
   Color primaryColorDark = const Color(0xff231F20);
   Color keyPadColor = const Color(0xFFF8F8F8);
   Color accentColor = const Color(0xFFDF933B);
+  Color accentColor2 = const Color(0xFFBF7E32);
   Color mainAppColor = Colors.blue;
   Color failViewColor = const Color(0xFF344058);
 
