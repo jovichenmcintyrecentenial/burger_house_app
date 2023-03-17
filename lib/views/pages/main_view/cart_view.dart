@@ -1,7 +1,10 @@
+import 'package:burger_house/models/segue_model/order_segue_model.dart';
+import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/main_view/providers/cart_view_provider.dart';
 import 'package:burger_house/views/pages/main_view/providers/main_manager_view_provider.dart';
+import 'package:burger_house/views/pages/order_confirmation/order_confirmation_view.dart';
 import 'package:burger_house/views/widgets/app_bars/title_app_bar_widget.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/cart_item.dart';
@@ -73,9 +76,13 @@ class CartView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 22),
                           child: MainButtonWidget(
                             'Checkout',
-                            onTap: () {},
+                            onTap: () =>
+                                AppRoutes.navigate(
+                                  context, OrderConfirmationView.routeName,
+                                  GenericArgs<OrderSegueModel>(
+                                      param: OrderSegueModel()),
                           ),
-                        )):SizedBox();
+                          ))):SizedBox();
             }
           )
         ],

@@ -1,5 +1,7 @@
 import 'package:burger_house/data/models/response_model/menu_item.dart';
+import 'package:burger_house/models/cart.dart';
 import 'package:burger_house/route/app_routes.dart';
+import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/views/pages/main_view/providers/main_manager_view_provider.dart';
 import 'package:burger_house/views/pages/main_view/providers/menu_items_base_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
@@ -19,16 +21,6 @@ class GirdView extends StatelessWidget {
   GirdView({
     super.key,required this.provider
   });
-
-  // final List<MenuItem> items = [
-  //   MenuItem(imageUrl: Images.burger1,name: 'Burger Classic',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger2,name: 'Burger Supreme',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger3,name: 'HOUSE Double',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger4,name: 'BH Single',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger5,name: 'Bacon Deluxe',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger5, name: 'HOUSE Triple',calories: 600,price: 7.99),
-  //   MenuItem(imageUrl: Images.burger1,name: 'XXX Classic',calories: 600,price: 7.99),
-  // ];
 
   List<Widget> buildGrids(MenuItemBaseProvider provider){
 
@@ -172,6 +164,93 @@ class GridItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class GridItem2 extends StatelessWidget {
+
+  final MenuItem menu;
+  final double scale;
+  final int index;
+
+  const GridItem2(this.menu,{
+    this.scale = 1,
+    required this.index ,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double height = 220 * scale;
+    double width = 200 * scale;
+    double imageHeight = 130 * scale;
+    double marginRight = 30 * scale;
+    double radius = 25 * scale;
+    double paddingHorizontalImage = 8 * scale;
+    double fontSize = 16 * scale;
+    return Container(
+      margin: EdgeInsets.only(right: marginRight,left: index==0?20:0),
+      width: width,
+      child: Stack(
+        children: [
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: height/1.4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                color: AppTheme.of(context).primaryColorLight,
+              ),
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 20 * scale,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: paddingHorizontalImage),
+                child: GenericImagehandler(menu.imageUrl,width: width,height: imageHeight,),
+              ),
+               SizedBox(height:10 * scale),
+               AutoTextSizeWidget(menu.name!,fontWeight: FontWeight.w600,fontSize: fontSize,),
+               SizedBox(height:5 * scale),
+
+            ],
+          ),
+          Positioned(
+              right: 0,
+              top:50*scale,
+              child: _MenuItemBadgeWidget(scale: scale, menu: menu)),
+        ],
+      ),
+    );
+  }
+}
+
+class _MenuItemBadgeWidget extends StatelessWidget {
+  const _MenuItemBadgeWidget({
+    required this.scale,
+    required this.menu,
+  });
+
+  final double scale;
+  final MenuItem menu;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 35 * scale,
+      height: 35 * scale,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(1000),
+        color:AppTheme.of(context).accentColor
+      ),
+      child: Center(
+          child: AutoTextSizeWidget(ServiceLocator.locator<Cart>()
+              .getAddedMenuItems(menu)
+              .toString(),fontSize: 30 * scale,)),
     );
   }
 }

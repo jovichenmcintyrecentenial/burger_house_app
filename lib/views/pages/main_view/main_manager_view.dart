@@ -18,7 +18,6 @@ class MainManagerView extends StatelessWidget {
    MainManagerView({Key? key,required this.args}) : super(key: key);
 
 
-  final provider = MainManagerProvider();
 
 
   @override
@@ -28,8 +27,8 @@ class MainManagerView extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
     ));
-    return ChangeNotifierProvider.value(
-        value: provider,
+    return ChangeNotifierProvider(
+        create: (_)=>MainManagerProvider(),
         builder: (context, snapshot) {
           return  Scaffold(
             extendBodyBehindAppBar: true,
@@ -41,15 +40,19 @@ class MainManagerView extends StatelessWidget {
                     Column(
                       children: [
                         Expanded(
-                          child: PageView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: provider.controller,
-                            children:   <Widget>[
-                              HomeView(isKeyboardVisble:isVisible),
-                              MenuView(),
-                              OrdersView(),
-                              CartView(),
-                            ],
+                          child: Consumer<MainManagerProvider>(
+                            builder: (context,provider,  snapshot) {
+                              return PageView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: provider.controller,
+                                children:   <Widget>[
+                                  HomeView(isKeyboardVisble:isVisible),
+                                  MenuView(),
+                                  OrdersView(),
+                                  CartView(),
+                                ],
+                              );
+                            }
                           ),
                         ),
                       ],
