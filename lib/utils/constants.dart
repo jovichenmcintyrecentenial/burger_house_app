@@ -40,6 +40,10 @@ class Images {
   static var trashIcon = '${assetImage}trash.svg';
   static var minusIcon = '${assetImage}minus.svg';
   static var emptyCartIcon = '${assetImage}empty_cart_icon.png';
+  static var cheronRight = '${assetImage}chevron_right.svg';
+  static var cardIcon = '${assetImage}card_icon.svg';
+  static var mapPinIcon = '${assetImage}map_pin_icon.svg';
+
 
 
 }
