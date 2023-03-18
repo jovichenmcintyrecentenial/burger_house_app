@@ -61,6 +61,10 @@ class Strings {
 
   static var cartItemDelete = 'cartItemDelete';
 
+  static var searchNotification = 'searchNotification';
+
+  static var denied = 'denied';
+
 
 }
 

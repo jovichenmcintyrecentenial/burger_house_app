@@ -1,4 +1,5 @@
 import 'package:burger_house/data/models/request_models/add_user_request.dart';
+import 'package:burger_house/data/models/response_model/places_api_response.dart';
 import 'package:burger_house/data/models/response_model/user_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
@@ -11,9 +12,10 @@ abstract class GoogleApiRepo {
 
   //get user information
   @GET('/maps/api/place/textsearch/json')
-  Future<User> getPlaces(
+  Future<PlaceApiResponse> getPlaces(
       @DioOptions() dioOptions,
       @Query('query')  String? query,
+      @Query('region')  String? region,
       @Query('key')  String? key,
       );
 }

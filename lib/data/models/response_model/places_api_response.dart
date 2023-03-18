@@ -1,15 +1,11 @@
-// To parse this JSON data, do
-//
-//     final placeApi = placeApiFromJson(jsonString);
-
 import 'dart:convert';
 
-PlaceApi placeApiFromJson(String str) => PlaceApi.fromJson(json.decode(str));
+PlaceApiResponse placeApiFromJson(String str) => PlaceApiResponse.fromJson(json.decode(str));
 
-String placeApiToJson(PlaceApi data) => json.encode(data.toJson());
+String placeApiToJson(PlaceApiResponse data) => json.encode(data.toJson());
 
-class PlaceApi {
-  PlaceApi({
+class PlaceApiResponse {
+  PlaceApiResponse({
     this.htmlAttributions,
     this.nextPageToken,
     this.results,
@@ -21,7 +17,7 @@ class PlaceApi {
   List<Result>? results;
   String? status;
 
-  factory PlaceApi.fromJson(Map<String, dynamic> json) => PlaceApi(
+  factory PlaceApiResponse.fromJson(Map<String, dynamic> json) => PlaceApiResponse(
     htmlAttributions: json["html_attributions"] == null ? [] : List<dynamic>.from(json["html_attributions"]!.map((x) => x)),
     nextPageToken: json["next_page_token"],
     results: json["results"] == null ? [] : List<Result>.from(json["results"]!.map((x) => Result.fromJson(x))),
@@ -38,7 +34,6 @@ class PlaceApi {
 
 class Result {
   Result({
-    this.businessStatus,
     this.formattedAddress,
     this.geometry,
     this.icon,
@@ -56,7 +51,6 @@ class Result {
     this.userRatingsTotal,
   });
 
-  BusinessStatus? businessStatus;
   String? formattedAddress;
   Geometry? geometry;
   String? icon;
@@ -74,11 +68,9 @@ class Result {
   int? userRatingsTotal;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    businessStatus: businessStatusValues.map[json["business_status"]]!,
     formattedAddress: json["formatted_address"],
     geometry: json["geometry"] == null ? null : Geometry.fromJson(json["geometry"]),
     icon: json["icon"],
-    iconBackgroundColor: iconBackgroundColorValues.map[json["icon_background_color"]]!,
     iconMaskBaseUri: json["icon_mask_base_uri"],
     name: json["name"],
     openingHours: json["opening_hours"] == null ? null : OpeningHours.fromJson(json["opening_hours"]),
@@ -88,12 +80,10 @@ class Result {
     priceLevel: json["price_level"],
     rating: json["rating"]?.toDouble(),
     reference: json["reference"],
-    types: json["types"] == null ? [] : List<Type>.from(json["types"]!.map((x) => typeValues.map[x]!)),
     userRatingsTotal: json["user_ratings_total"],
   );
 
   Map<String, dynamic> toJson() => {
-    "business_status": businessStatusValues.reverse[businessStatus],
     "formatted_address": formattedAddress,
     "geometry": geometry?.toJson(),
     "icon": icon,
@@ -111,12 +101,6 @@ class Result {
     "user_ratings_total": userRatingsTotal,
   };
 }
-
-enum BusinessStatus { OPERATIONAL }
-
-final businessStatusValues = EnumValues({
-  "OPERATIONAL": BusinessStatus.OPERATIONAL
-});
 
 class Geometry {
   Geometry({

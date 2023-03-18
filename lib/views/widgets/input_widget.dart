@@ -12,13 +12,15 @@ class InputWidget extends StatelessWidget {
   final TextEditingController? controller;
 
   final Function(String text)? onChangeText;
+
+  final double? fontSize;
   const InputWidget({
     super.key, required this.title,
     this.keyboardType,
       this.obscureText = false,
       this.controller,
       this.onChangeText,
-      this.autoFocus = false});
+      this.autoFocus = false, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class InputWidget extends StatelessWidget {
           controller: controller,
           onChanged: onChangeText,
           autofocus: autoFocus,
-          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
+          style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500,fontSize: fontSize),
           decoration: InputDecoration(
               label: AutoTextSizeWidget(
                 title,

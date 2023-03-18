@@ -37,7 +37,7 @@ class UserCheckoutTitleItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AutoTextSizeWidget(title,color: Color(0xff7A7D86),),
-                    SizedBox(height:1),
+                    SizedBox(height:2),
                     Row(
                       children: [
                         GenericImagehandler(
@@ -52,7 +52,7 @@ class UserCheckoutTitleItem extends StatelessWidget {
                             data,
                             style: TextStyle(
                                 fontSize: 17,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: Color(0xffE1E3EB),
                                 overflow: TextOverflow.ellipsis),
                           ),
