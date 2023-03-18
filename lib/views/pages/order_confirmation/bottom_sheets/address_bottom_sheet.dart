@@ -53,39 +53,46 @@ class AddressBottomSheet extends StatelessWidget {
                                   onChangeText: provider
                                       .onChangeSearch),
                               SizedBox(height: 10,),
-                              StreamListeningWidget(
-                                streamName: Strings.searchNotification,
-                                builder: (context,PlaceApiResponse? placeApiResponse) {
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: placeApiResponse?.results?.length??0,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                          margin: EdgeInsets.only(bottom: 1),
-                                          decoration: BoxDecoration(
-                                            color:AppTheme.of(context).primaryColorLight
-                                                ,borderRadius: BorderRadius.circular(10)
-                                          ),
-                                            child: Row(
-                                              children: [
-                                                GenericImagehandler(Images.mapPinIcon),
-                                                SizedBox(width:10),
-                                                Expanded(
-                                                  child: AutoTextSizeWidget(
-                                                      placeApiResponse
-                                                              ?.results![index]
-                                                              .formattedAddress ??
-                                                          '',maxLine: 3,fontSize: 15,),
-                                                ),
-                                              ],
-                                            ));
-                                      },
+                              Expanded(
+                                child: StreamListeningWidget(
+                                  streamName: Strings.searchNotification,
+                                  builder: (context,PlaceApiResponse? placeApiResponse) {
+                                    return Container(
+                                      margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: placeApiResponse?.results?.length??0,
+                                        itemBuilder: (BuildContext context, int index) {
+                                          return Container(
+                                              constraints: BoxConstraints(
+                                                minHeight: 70,
+                                              ),
+                                            padding: EdgeInsets.symmetric(horizontal: 13,vertical: 14),
+                                              margin: EdgeInsets.only(bottom: 1),
+                                              decoration: BoxDecoration(
+                                                color:AppTheme.of(context).primaryColorLight
+                                                    ,borderRadius: BorderRadius.circular(10)
+                                              ),
+                                                child: Row(
+                                                  children: [
+                                                    GenericImagehandler(Images.mapPinIcon),
+                                                    SizedBox(width:10),
+                                                    Expanded(
+                                                      child: AutoTextSizeWidget(
+                                                          placeApiResponse
+                                                                  ?.results![index]
+                                                                  .formattedAddress ??
+                                                              '',maxLine: 3,fontSize: 15,),
+                                                    ),
+                                                  ],
+                                                ));
+                                          },
 
-                                  );
-                                },
-                              )
-
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ],
                           );
                         }

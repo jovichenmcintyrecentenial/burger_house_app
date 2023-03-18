@@ -30,7 +30,7 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
     }
     lastRequest = Uuid().v4();
     var previous = lastRequest;
-    timer = Timer(Duration(milliseconds: 250), () {
+    timer = Timer(Duration(milliseconds: 300), () {
       _googleApiRepo
           .getPlaces(pullFromNet, text,'CA', Env.get(EnvKey.GOOGLE_API_KEY))
           .then((result) {
