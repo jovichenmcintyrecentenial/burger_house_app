@@ -45,8 +45,8 @@ class MenuItemBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconTextWidget('${menu.prepareTime} min',image:Images.clockIcon),
-                IconTextWidget('${menu.prepareTime} cals',image:Images.flameIcon),
-                IconTextWidget('${menu.prepareTime} likes',image:Images.starIcon),
+                IconTextWidget('${menu.calories} cals',image:Images.flameIcon),
+                IconTextWidget('${menu.likes} likes',image:Images.starIcon),
                 SizedBox(width: 10),
               ],
             ),

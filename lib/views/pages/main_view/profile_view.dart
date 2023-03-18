@@ -14,51 +14,55 @@ class ProfileView extends StatelessWidget {
   ProfileView({
     super.key,
   });
+  static var routeName ='ProfileView';
 
   final List<String> images = [Images.slide1,Images.slide1,Images.slide1,Images.slide1,Images.slide1];
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Helper.getScaleWidthPercentage(context, 5)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      backgroundColor: AppTheme.of(context).primaryColor,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Helper.getScaleWidthPercentage(context, 5)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
 
-        children: [
+          children: [
 
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-            children: [
-              AppTitleBar('My Profile'),
-              const AvtarWidget(),
-              const TitleHeaderWidget('Johnson Brown',fontSize: 29,fontHeight: 1.3,),
+              children: [
+                AppTitleBar('My Profile',hasLeading: true,),
+                const AvtarWidget(),
+                const TitleHeaderWidget('Johnson Brown',fontSize: 29,fontHeight: 1.3,),
+                  SizedBox(height: 20,),
+                  Container(decoration: BoxDecoration(
+                    color: AppTheme.of(context).primaryColorLight,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start
+                      ,children:
+                    [
+                      AutoTextSizeWidget('Settings',fontWeight: FontWeight.w700, color:Color(0xff7A7D86)),
+                      SettingListItem(Images.userIcon,'Edit Profile'),
+                      SettingListItem(Images.ordersIcon,'My Orders'),
+                      SettingListItem(Images.lockIcon,'Change Password',noDivider: true,),
+                    ],),
+                  ),
+                ),
                 SizedBox(height: 20,),
-                Container(decoration: BoxDecoration(
-                  color: AppTheme.of(context).primaryColorLight,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start
-                    ,children:
-                  [
-                    AutoTextSizeWidget('Settings',fontWeight: FontWeight.w700, color:Color(0xff7A7D86)),
-                    SettingListItem(Images.userIcon,'Edit Profile'),
-                    SettingListItem(Images.ordersIcon,'My Orders'),
-                    SettingListItem(Images.lockIcon,'Change Password',noDivider: true,),
-                  ],),
-                ),
-              ),
-              SizedBox(height: 20,),
-              SettingListItem(Images.logoutIcon,'Log out',noDivider: true,isIsolated: true,),
+                SettingListItem(Images.logoutIcon,'Log out',noDivider: true,isIsolated: true,),
 
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
