@@ -28,7 +28,9 @@ abstract class UserRepo {
 
   //get user information
   @DELETE('/users/addresses/{id}')
-  Future deleteAddresses();
+  Future deleteAddresses(
+      @Path('id') addressId
+      );
 
   //add new address user
   @POST('/users/addresses')

@@ -166,8 +166,11 @@ class _ListOfAddresses extends StatelessWidget {
               itemBuilder:
                   (BuildContext context, int index) {
                 var address = provider.addresses[index];
-                return AddressListItemDark(address: address);
-              },
+              return AddressListItemDark(
+                address: address,
+                onDismissed: ()=>provider.removeItem(index),
+              );
+            },
             ),
         ),
         SizedBox(height: 20,)
@@ -177,39 +180,64 @@ class _ListOfAddresses extends StatelessWidget {
 }
 
 class AddressListItemDark extends StatelessWidget {
+  final Function() onDismissed;
+
   const AddressListItemDark({
     super.key,
-    required this.address,
+    required this.address, required this.onDismissed,
   });
 
   final Address address;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(bottom: 15),
-        padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right:5),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-        color:AppTheme.of(context).primaryColorDark
-        ),
-        child: Row(
-          children: [
-            SizedBox(width: 10,),
-            GenericImagehandler(Images.mapPinIcon),
-            SizedBox(width: 13,),
-            Flexible(child: AutoTextSizeWidget(address.address!,maxLine: 2,)),
-            GenericImagehandler(Images.cheronRight)
-          ],
-        ));
+    return GestureDetector(
+      onTap: (){
+        Navigator.pop(context,address);
+      },
+      child: Column(
+        children: [
+          Dismissible(
+            key: Key(address.id!),
+            direction: DismissDirection.endToStart, // Only allow swiping from right to left
+            background: Container(
+              padding: EdgeInsets.only(right: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Color(0xffd24242),
+              ),
+              child: Icon(Icons.delete,color: Colors.white,),
+              alignment: Alignment.centerRight,
+            ),
+            onDismissed: (_)=>onDismissed(),
+            child: Container(
+                padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right:5),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+                color:AppTheme.of(context).primaryColorDark
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(width: 10,),
+                    GenericImagehandler(Images.mapPinIcon),
+                    SizedBox(width: 13,),
+                    Flexible(child: AutoTextSizeWidget(address.address!,maxLine: 2,)),
+                  ],
+                )),
+          ),
+          SizedBox(height: 10,)
+        ],
+      ),
+    );
   }
 }
 
 class LocationsListItem extends StatelessWidget {
-  final Result? result;
 
+  final Result? result;
   final Function() onTap;
 
-  const LocationsListItem( this.result,
+  const LocationsListItem(
+      this.result,
       {required this.onTap,
       super.key,
       });

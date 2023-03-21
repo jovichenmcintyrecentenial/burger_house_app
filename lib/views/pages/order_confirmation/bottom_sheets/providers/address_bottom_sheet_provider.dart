@@ -93,9 +93,19 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
     await _userRepo.addNewAddress(AddAddressRequest(
         address: result.formattedAddress,
         latitude: result.geometry?.location?.lat ?? 0,
-        longitude: result.geometry?.location?.lat ?? 0,
+        longitude: result.geometry?.location?.lng ?? 0,
     ));
     updateList();
   }
+
+  void removeItem(int index) {
+    _userRepo.deleteAddresses(addresses[index].id);
+    addresses.removeAt(index);
+    notifyListenersSafe();
+    if (addresses.isEmpty) {
+      updateState(PageState.viewAddress);
+    }
+  }
+
 
 }
