@@ -2,8 +2,11 @@
 
 import 'dart:async';
 
+import 'package:burger_house/data/models/request_models/add_address_requesst.dart';
 import 'package:burger_house/data/models/response_model/places_api_response.dart';
 import 'package:burger_house/data/repositories/google_api_repo.dart';
+import 'package:burger_house/data/repositories/user_repo.dart';
+import 'package:burger_house/models/address.dart';
 import 'package:burger_house/models/segue_model/segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/services/service_locator.dart';
@@ -16,13 +19,21 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:uuid/uuid.dart';
 
 class AddressBottomSheetProvider extends SegueNotifierViewProvider{
+  final _userRepo = ServiceLocator.locator<UserRepo>();
+
   PageState pageState = PageState.viewAddress;
   String lastRequest = '';
   final _googleApiRepo = ServiceLocator.locator<GoogleApiRepo>();
 
   PlaceApiResponse? response;
 
+  AddressBottomSheetProvider(){
+    updateList();
+  }
+
   Timer? timer;
+
+  List<Address> addresses = [];
   void onChangeSearch(text){
 
     if(timer != null) {
@@ -47,6 +58,20 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
     });
   }
 
+  void updateList(){
+    startLoading();
+    _userRepo.getMyAddresses(pullFromDisk()).then((results){
+      addresses = results;
+      stopLoading();
+    });
+    _userRepo.getMyAddresses(pullFromNet()).then((results){
+      addresses = results;
+    })
+    .whenComplete((){
+      stopLoading();
+    });
+  }
+
   @override
   bool isOk(BuildContext context, {GenericArgs? args}) {
     return true;
@@ -59,6 +84,18 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
   void updateState(PageState state) {
     pageState = state;
     notifyListenersSafe();
+  }
+
+  Future<void> selectedAddress(Result result) async {
+    updateState(PageState.viewAddress);
+    startLoading();
+
+    await _userRepo.addNewAddress(AddAddressRequest(
+        address: result.formattedAddress,
+        latitude: result.geometry?.location?.lat ?? 0,
+        longitude: result.geometry?.location?.lat ?? 0,
+    ));
+    updateList();
   }
 
 }

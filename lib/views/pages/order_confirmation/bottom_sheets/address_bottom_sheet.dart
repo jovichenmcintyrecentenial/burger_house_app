@@ -1,4 +1,5 @@
 import 'package:burger_house/data/models/response_model/places_api_response.dart';
+import 'package:burger_house/models/address.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/providers/address_bottom_sheet_provider.dart';
@@ -57,12 +58,15 @@ class AddressBottomSheet extends StatelessWidget {
                                 child: StreamListeningWidget(
                                   streamName: Strings.searchNotification,
                                   builder: (context,PlaceApiResponse? placeApiResponse) {
+
                                     return Container(
                                       margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         itemCount: placeApiResponse?.results?.length??0,
                                         itemBuilder: (BuildContext context, int index) {
+                                          var result = placeApiResponse
+                                              ?.results![index];
                                           return Container(
                                               constraints: BoxConstraints(
                                                 minHeight: 70,
@@ -73,19 +77,14 @@ class AddressBottomSheet extends StatelessWidget {
                                                 color:AppTheme.of(context).primaryColorLight
                                                     ,borderRadius: BorderRadius.circular(10)
                                               ),
-                                                child: Row(
-                                                  children: [
-                                                    GenericImagehandler(Images.mapPinIcon),
-                                                    SizedBox(width:10),
-                                                    Expanded(
-                                                      child: AutoTextSizeWidget(
-                                                          placeApiResponse
-                                                                  ?.results![index]
-                                                                  .formattedAddress ??
-                                                              '',maxLine: 3,fontSize: 15,),
-                                                    ),
-                                                  ],
-                                                ));
+                                              child: LocationsListItem(
+                                                result,
+                                                onTap: () {
+                                                  provider
+                                                      .selectedAddress(result!);
+                                                },
+                                              ),
+                                            );
                                           },
 
                                       ),
@@ -102,7 +101,12 @@ class AddressBottomSheet extends StatelessWidget {
                       children: [
                         SizedBox(height: 10,),
                         AppTitleBar('Delivery Address',color: Colors.transparent,fontWeight:FontWeight.w600),
-                        EmptyAddressWiget(),
+                              provider.isLoading?
+                              CircularProgressIndicator()
+                                  :
+                              !provider.addresses.isEmpty
+                                  ? _ListOfAddresses()
+                                  : EmptyAddressWiget(),
                         Row(
                           children: [
                             Flexible(
@@ -140,6 +144,95 @@ class AddressBottomSheet extends StatelessWidget {
   }
 }
 
+class _ListOfAddresses extends StatelessWidget {
+  const _ListOfAddresses({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<AddressBottomSheetProvider>(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+
+        AutoTextSizeWidget('Recent Addresses',color:Color(0xff7A7D86),fontSize: 15,),
+        SizedBox(height: 15,),
+        Flexible(
+          child: ListView.builder(
+              itemCount: provider.addresses.length,
+              shrinkWrap: true,
+              itemBuilder:
+                  (BuildContext context, int index) {
+                var address = provider.addresses[index];
+                return AddressListItemDark(address: address);
+              },
+            ),
+        ),
+        SizedBox(height: 20,)
+      ],
+    );
+  }
+}
+
+class AddressListItemDark extends StatelessWidget {
+  const AddressListItemDark({
+    super.key,
+    required this.address,
+  });
+
+  final Address address;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.only(bottom: 15),
+        padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right:5),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+        color:AppTheme.of(context).primaryColorDark
+        ),
+        child: Row(
+          children: [
+            SizedBox(width: 10,),
+            GenericImagehandler(Images.mapPinIcon),
+            SizedBox(width: 13,),
+            Flexible(child: AutoTextSizeWidget(address.address!,maxLine: 2,)),
+            GenericImagehandler(Images.cheronRight)
+          ],
+        ));
+  }
+}
+
+class LocationsListItem extends StatelessWidget {
+  final Result? result;
+
+  final Function() onTap;
+
+  const LocationsListItem( this.result,
+      {required this.onTap,
+      super.key,
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: this.onTap,
+      child: Row(
+        children: [
+          GenericImagehandler(Images.mapPinIcon),
+          SizedBox(width:10),
+          Expanded(
+            child: AutoTextSizeWidget(
+                result?.formattedAddress ??
+                    '',maxLine: 3,fontSize: 15,),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _CloseButton extends StatelessWidget {
   const _CloseButton({
     super.key,
@@ -160,5 +253,5 @@ class _CloseButton extends StatelessWidget {
   }
 }
 
-enum PageState { locationSearch, viewAddress}
+enum PageState { locationSearch, viewAddress, isLoading}
 
