@@ -1,3 +1,4 @@
+import 'package:burger_house/models/address.dart';
 import 'package:burger_house/models/segue_model/order_segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
@@ -55,7 +56,7 @@ class OrderConfirmationView extends StatelessWidget {
                               data: 'Tap here to create an address',
                               onTap: () async {
                                 Helper.hideKeyboard(context);
-                                var isDataUpdated = await showModalBottomSheet<bool>(
+                                var data = await showModalBottomSheet<Address>(
                                   context: context,
                                   isDismissible: true,
                                   isScrollControlled: true,
@@ -65,7 +66,8 @@ class OrderConfirmationView extends StatelessWidget {
                                   },
                                 );
 
-                                if(isDataUpdated == true){
+                                if(data != null){
+                                  provider.address = data;
                                 }
                               }
                             ),

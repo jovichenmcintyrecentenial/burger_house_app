@@ -3,6 +3,7 @@ import 'package:burger_house/data/models/request_models/order_request_model.dart
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/data/models/response_model/order_response_model.dart';
 import 'package:burger_house/data/repositories/order_repo.dart';
+import 'package:burger_house/models/address.dart';
 import 'package:burger_house/models/cart.dart';
 import 'package:burger_house/models/segue_model/order_segue_model.dart';
 import 'package:burger_house/models/segue_model/segue_model.dart';
@@ -14,11 +15,12 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegueModel>{
 
-  String? addressId;
   String? paymentMethodId;
   Order? orderDetails ;
 
   var _cart = ServiceLocator.locator<Cart>();
+
+  Address? address;
 
   OrderConfirmationViewProvider(){
     estimateFees();
@@ -65,10 +67,7 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
     var noAddressMessage = 'Please select/create a deliver address';
     var noPaymentMethodMessage = 'Please select/create a deliver address';
 
-    if(addressId == null){
-      throw DisplayableException(noAddressMessage);
-    }
-    else if(addressId!.isEmpty){
+    if(address == null){
       throw DisplayableException(noAddressMessage);
     }
 
@@ -84,7 +83,7 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
 
   @override
   void updateSegueObject({GenericArgs<OrderSegueModel>? args}) {
-    args!.param.addressId = addressId;
+    args!.param.address = address;
     args.param.paymentMethodId = paymentMethodId;
 
   }
