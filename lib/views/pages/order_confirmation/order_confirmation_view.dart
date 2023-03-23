@@ -53,7 +53,7 @@ class OrderConfirmationView extends StatelessWidget {
                             UserCheckoutTitleItem(
                               image: Images.mapPinIcon,
                               title: 'Your Delivery Address',
-                              data: 'Tap here to create an address',
+                              data: provider.address==null?'Tap here to create an address':provider.address!.address!,
                               onTap: () async {
                                 Helper.hideKeyboard(context);
                                 var data = await showModalBottomSheet<Address>(

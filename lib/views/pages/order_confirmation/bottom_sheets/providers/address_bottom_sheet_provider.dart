@@ -100,6 +100,7 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
 
   void removeItem(int index) {
     _userRepo.deleteAddresses(addresses[index].id);
+    _userRepo.getMyAddresses(pullFromNet()).then((results){});
     addresses.removeAt(index);
     notifyListenersSafe();
     if (addresses.isEmpty) {

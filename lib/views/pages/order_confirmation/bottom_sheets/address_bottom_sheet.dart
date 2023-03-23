@@ -211,7 +211,10 @@ class AddressListItemDark extends StatelessWidget {
             ),
             onDismissed: (_)=>onDismissed(),
             child: Container(
-                padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right:5),
+                constraints: BoxConstraints(
+                  minHeight: 70,
+                ),
+                padding: EdgeInsets.only(top: 10,bottom: 10,left: 10,right:10),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
                 color:AppTheme.of(context).primaryColorDark
                 ),
