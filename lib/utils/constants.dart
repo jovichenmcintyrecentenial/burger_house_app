@@ -44,6 +44,8 @@ class Images {
   static var cardIcon = '${assetImage}card_icon.svg';
   static var mapPinIcon = '${assetImage}map_pin_icon.svg';
   static var noAdderssIcon = '${assetImage}no_adderss_icon.svg';
+  static var loader = '${assetImage}loaded.riv';
+
 
 
 
