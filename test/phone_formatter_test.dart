@@ -15,6 +15,19 @@ void main() {
       expect(formattedNumber, equals('123 4567 8 90'));
     });
 
+    test('formatUsingTemplate should format number correctly with specific template', () {
+      final formattedNumber = PhoneNumberFormatter.formatUsingTemplate(
+          number: '1234567890123456', template: '____-____-____-____');
+      expect(formattedNumber, equals('1234-5678-9012-3456'));
+    });
+
+    test('formatUsingTemplate should format number correctly with specific template', () {
+      final formattedNumber = PhoneNumberFormatter.formatUsingTemplate(
+          number: '12345678901', template: '____-____-____-____');
+      expect(formattedNumber, equals('1234-5678-901'));
+    });
+
+
     test('cleanNumber should remove special characters', () {
       final cleanedNumber = PhoneNumberFormatter.cleanNumber(
           number: '(123) 456-7890', options: CleanType.full);

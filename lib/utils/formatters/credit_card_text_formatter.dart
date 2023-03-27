@@ -9,7 +9,7 @@ class CreditCardFormatter extends TextInputFormatter {
 
     var cleanText = NumberFormatter.clean(newValue.text);
     cleanText = PhoneNumberFormatter.cleanNumber(number: cleanText);
-    var formattedNumber = PhoneNumberFormatter.formatUsingTemplate(number:cleanText,template:'____ ____ ____ ____');
+    var formattedNumber = PhoneNumberFormatter.formatUsingTemplate(number:cleanText,template:'____-____-____-____');
 
     return TextEditingValue(
       text: formattedNumber!,
