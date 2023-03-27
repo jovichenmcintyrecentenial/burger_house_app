@@ -34,65 +34,67 @@ class PaymentBottomSheet extends StatelessWidget {
                         : Colors.black.withOpacity(.7),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Padding(
+                  child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 47),
                     child: Stack(
                       children: [
-
                         provider.pageState==PPageState.addNewPayment?
                         Consumer<PaymentBottomSheetProvider>(
                             builder: (context, provider ,snapshot) {
-                              return Column(
-                                children: [
-                                  AppTitleBar('',color:Colors.transparent),
-                                  AppTitleBar('',color:Colors.transparent,
-                                    actions: [_CloseButton()],),
-                                  InputWidget(
-                                      title: 'Search for your address',
-                                      autoFocus: true,
-                                      fontSize:17,
-                                      onChangeText: provider
-                                          .onChangeSearch),
-                                  SizedBox(height: 10,),
-                                  Expanded(
-                                    child: StreamListeningWidget(
-                                      streamName: Strings.searchNotification,
-                                      builder: (context,PlaceApiResponse? placeApiResponse) {
+                              return Container(
+                                color:Colors.green,
+                                child: Column(
+                                  children: [
+                                    AppTitleBar('',color:Colors.transparent),
+                                    AppTitleBar('',color:Colors.transparent,
+                                      actions: [_CloseButton()],),
+                                    InputWidget(
+                                        title: 'Search for your address',
+                                        autoFocus: true,
+                                        fontSize:17,
+                                        onChangeText: provider
+                                            .onChangeSearch),
+                                    SizedBox(height: 10,),
+                                    Expanded(
+                                      child: StreamListeningWidget(
+                                        streamName: Strings.searchNotification,
+                                        builder: (context,PlaceApiResponse? placeApiResponse) {
 
-                                        return Container(
-                                          margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: placeApiResponse?.results?.length??0,
-                                            itemBuilder: (BuildContext context, int index) {
-                                              var result = placeApiResponse
-                                                  ?.results![index];
-                                              return Container(
-                                                constraints: BoxConstraints(
-                                                  minHeight: 70,
-                                                ),
-                                                padding: EdgeInsets.symmetric(horizontal: 13,vertical: 14),
-                                                margin: EdgeInsets.only(bottom: 1),
-                                                decoration: BoxDecoration(
-                                                    color:AppTheme.of(context).primaryColorLight
-                                                    ,borderRadius: BorderRadius.circular(10)
-                                                ),
-                                                child: LocationsListItem(
-                                                  result,
-                                                  onTap: () {
-                                                    provider
-                                                        .selectedAddress(result!);
-                                                  },
-                                                ),
-                                              );
-                                            },
+                                          return Container(
+                                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: placeApiResponse?.results?.length??0,
+                                              itemBuilder: (BuildContext context, int index) {
+                                                var result = placeApiResponse
+                                                    ?.results![index];
+                                                return Container(
+                                                  constraints: BoxConstraints(
+                                                    minHeight: 70,
+                                                  ),
+                                                  padding: EdgeInsets.symmetric(horizontal: 13,vertical: 14),
+                                                  margin: EdgeInsets.only(bottom: 1),
+                                                  decoration: BoxDecoration(
+                                                      color:AppTheme.of(context).primaryColorLight
+                                                      ,borderRadius: BorderRadius.circular(10)
+                                                  ),
+                                                  child: LocationsListItem(
+                                                    result,
+                                                    onTap: () {
+                                                      provider
+                                                          .selectedAddress(result!);
+                                                    },
+                                                  ),
+                                                );
+                                              },
 
-                                          ),
-                                        );
-                                      },
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               );
                             }
                         )
@@ -111,7 +113,7 @@ class PaymentBottomSheet extends StatelessWidget {
                               children: [
                                 Flexible(
                                     child: MediumButtonWidget(
-                                      'Add a Card',
+                                      'Add New Card',
                                       hasShadow: false,
                                       onTap: () {
                                         provider.updateState(PPageState.addNewPayment);
