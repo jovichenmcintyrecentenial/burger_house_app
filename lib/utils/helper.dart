@@ -122,12 +122,12 @@ class Helper {
   }
 
 
-  static void showErrorException(codeBlock,{required BuildContext? context}) {
+  static void showErrorException(codeBlock,{required BuildContext? context, shouldHideKeyboard = true}) {
     try {
       codeBlock();
     } on Exception catch (exception) {
       if (exception is DisplayableException) {
-        if(context!=null){
+        if(context!=null && shouldHideKeyboard){
           hideKeyboard(context);
         }
         Helper.showToast((exception).errorMessage);

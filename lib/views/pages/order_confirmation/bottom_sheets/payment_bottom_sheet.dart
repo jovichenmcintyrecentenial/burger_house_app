@@ -1,7 +1,12 @@
 import 'package:burger_house/data/models/response_model/places_api_response.dart';
 import 'package:burger_house/models/address.dart';
+import 'package:burger_house/models/mixins/validator_mixin.dart';
+import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
+import 'package:burger_house/utils/formatters/credit_card_date_formatter.dart';
+import 'package:burger_house/utils/formatters/credit_card_text_formatter.dart';
+import 'package:burger_house/utils/formatters/cvv_text_formatter.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/providers/payment_bottom_sheet_provider.dart';
 import 'package:burger_house/views/widgets/app_bars/title_app_bar_widget.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
@@ -9,15 +14,19 @@ import 'package:burger_house/views/widgets/empty_list_widget/empty_payment_widge
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/main_button_widget.dart';
-import 'package:burger_house/views/widgets/stream_listner_widget.dart';
+import 'package:burger_house/views/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PaymentBottomSheet extends StatelessWidget {
+class PaymentBottomSheet extends StatelessWidget with ValidatorMixin<PaymentBottomSheetProvider>{
   const PaymentBottomSheet({
     super.key,
   });
 
+  @override
+  void onSuccessValidation(BuildContext context, {String? routeName, PaymentBottomSheetProvider? provider, GenericArgs? args}) {
+    provider!.saveCard();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -34,82 +43,116 @@ class PaymentBottomSheet extends StatelessWidget {
                         : Colors.black.withOpacity(.7),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 47),
-                    child: Stack(
-                      children: [
-                        provider.pageState==PPageState.addNewPayment?
-                        Consumer<PaymentBottomSheetProvider>(
-                            builder: (context, provider ,snapshot) {
-                              return Container(
-                                color:Colors.green,
-                                child: Column(
-                                  children: [
-                                    AppTitleBar('',color:Colors.transparent),
-                                    AppTitleBar('',color:Colors.transparent,
-                                      actions: [_CloseButton()],),
-                                    InputWidget(
-                                        title: 'Search for your address',
-                                        autoFocus: true,
-                                        fontSize:17,
-                                        onChangeText: provider
-                                            .onChangeSearch),
-                                    SizedBox(height: 10,),
-                                    Expanded(
-                                      child: StreamListeningWidget(
-                                        streamName: Strings.searchNotification,
-                                        builder: (context,PlaceApiResponse? placeApiResponse) {
-
-                                          return Container(
-                                            margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              itemCount: placeApiResponse?.results?.length??0,
-                                              itemBuilder: (BuildContext context, int index) {
-                                                var result = placeApiResponse
-                                                    ?.results![index];
-                                                return Container(
-                                                  constraints: BoxConstraints(
-                                                    minHeight: 70,
-                                                  ),
-                                                  padding: EdgeInsets.symmetric(horizontal: 13,vertical: 14),
-                                                  margin: EdgeInsets.only(bottom: 1),
-                                                  decoration: BoxDecoration(
-                                                      color:AppTheme.of(context).primaryColorLight
-                                                      ,borderRadius: BorderRadius.circular(10)
-                                                  ),
-                                                  child: LocationsListItem(
-                                                    result,
-                                                    onTap: () {
-                                                      provider
-                                                          .selectedAddress(result!);
-                                                    },
-                                                  ),
-                                                );
-                                              },
-
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
+                  child: Stack(
+                    children: [
+                      provider.pageState==PPageState.addNewPayment?
+                      Consumer<PaymentBottomSheetProvider>(
+                          builder: (context, provider ,snapshot) {
+                            return Container(
+                              padding: EdgeInsets.only(left: 30,right: 30),
+                              margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20),),
+                                  color: AppTheme.of(context).primaryColorLight
                                 ),
-                              );
-                            }
-                        )
-                            :Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 10,),
-                            AppTitleBar('Payment Methods',color: Colors.transparent,fontWeight:FontWeight.w600),
-                            provider.isLoading?
-                            CircularProgressIndicator()
-                                :
-                            !provider.cards.isEmpty
-                                ? _ListOfAddresses()
-                                : EmptyPaymentWiget(),
-                            Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Padding(
+                                    padding:
+                                    EdgeInsets.symmetric(horizontal: .0, vertical: 10),
+                                    child: AppTitleBar(
+                                      'Add a Card',
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                  SubTitleWidget('Add Card'),
+                                  const SizedBox(height: 20),
+                                  InputWidget(
+                                    title: 'Card Number',
+                                    autoFocus: true,
+                                    fontSize: 17,
+                                    color: AppTheme.of(context).primaryColorDark,
+                                    inputFormatter: CreditCardFormatter(),
+                                    onChangeText: (text) => provider.cardNumber = text,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Flexible(
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: InputWidget(
+                                            title: 'Expiry Date',
+                                            autoFocus: false,
+                                            fontSize: 17,
+                                            color: AppTheme.of(context).primaryColorDark,
+                                            inputFormatter: CreditCardDateFormatter(),
+                                            onChangeText: (text) => provider.dateText = text,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Expanded(
+                                          child: InputWidget(
+                                            title: 'CVV',
+                                            autoFocus: false,
+                                            fontSize: 17,
+                                            color: AppTheme.of(context).primaryColorDark,
+                                            inputFormatter: CreditCardCVVFormatter(),
+                                            onChangeText: (text) => provider.cvv = text,
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height:20,),
+                                  const SizedBox(height:20,),
+                                  Flexible(
+                                    child: Row(
+                                      children: [
+                                        Flexible(
+                                            child: MediumButtonWidget(
+                                                'Save Card',
+                                                hasShadow: false,
+                                                onTap: ()=> onValidate(context, provider,null,routeName: null,shouldHideKeyboard: false)
+
+
+                                            )),
+                                        SizedBox(width: 20,),
+                                        Flexible(
+                                            child: MediumButtonWidget(
+                                              'Go Back',
+                                              isSecondaryButton: true,
+                                              hasShadow: false,
+                                              onTap: () {
+                                                provider.updateState(PPageState.viewPayments);
+                                              },
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height:20,),
+                                  const SizedBox(height:20,),
+                                ],
+                              ),
+                            );
+                          }
+                          )
+                          :Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: 10,),
+                          AppTitleBar('Payment Methods',color: Colors.transparent,fontWeight:FontWeight.w600),
+                          provider.isLoading?
+                          CircularProgressIndicator()
+                              :
+                          !provider.cards.isEmpty
+                              ? _ListOfAddresses()
+                              : EmptyPaymentWiget(),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: Row(
                               children: [
                                 Flexible(
                                     child: MediumButtonWidget(
@@ -131,12 +174,12 @@ class PaymentBottomSheet extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            SafeArea(child: const SizedBox(height: 40,)),
+                          ),
+                          SafeArea(child: const SizedBox(height: 40,)),
 
-                          ],
-                        )
-                      ],
-                    ),
+                        ],
+                      )
+                    ],
                   ),
                 );
               }

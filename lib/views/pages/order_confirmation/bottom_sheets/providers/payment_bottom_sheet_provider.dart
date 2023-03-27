@@ -13,6 +13,9 @@ import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/utils/cache_helper.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/env.dart';
+import 'package:burger_house/utils/formatters/number_formtter.dart';
+import 'package:burger_house/utils/helper.dart';
+import 'package:burger_house/utils/validator.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/payment_bottom_sheet.dart';
 import 'package:burger_house/views/widgets/stream_listner_widget.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -20,6 +23,10 @@ import 'package:uuid/uuid.dart';
 
 class PaymentBottomSheetProvider extends SegueNotifierViewProvider{
   final _userRepo = ServiceLocator.locator<UserRepo>();
+
+  String cardNumber = '';
+  String dateText = '';
+  String cvv = '';
 
   PPageState pageState = PPageState.viewPayments;
   String lastRequest = '';
@@ -74,6 +81,19 @@ class PaymentBottomSheetProvider extends SegueNotifierViewProvider{
 
   @override
   bool isOk(BuildContext context, {GenericArgs? args}) {
+    if(!Validator.isXLong(NumberFormatter.clean(cardNumber),15)){
+      throw(DisplayableException('Please enter valid credit card number'));
+    }
+
+    Validator.isCCDateValid(dateText);
+
+    if(!Validator.isNotEmpty(cvv)){
+      throw(DisplayableException('Please enter 3 digit CVV'));
+    }
+
+    if(!Validator.isXLong(NumberFormatter.clean(cvv),3)){
+      throw(DisplayableException('Please enter 3 digit CVV'));
+    }
     return true;
   }
 
@@ -106,6 +126,10 @@ class PaymentBottomSheetProvider extends SegueNotifierViewProvider{
     if (cards.isEmpty) {
       updateState(PPageState.viewPayments);
     }
+  }
+
+  void saveCard() {
+
   }
 
 

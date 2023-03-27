@@ -32,7 +32,18 @@ class PhoneNumberFormatter {
       for (var char in chars) {
         formattedNumber = formattedNumber.replaceFirst('_', char);
       }
+
       formattedNumber = formattedNumber.replaceAll('_', '');
+
+      RegExp pattern = RegExp(r'\d');
+      int index = formattedNumber.lastIndexOf(pattern);
+      if(index != -1){
+        formattedNumber = formattedNumber.substring(0,index+1);
+      }
+      else if(number.length == 0){
+        formattedNumber = "";
+      }
+
     }
     return formattedNumber.trim();
   }

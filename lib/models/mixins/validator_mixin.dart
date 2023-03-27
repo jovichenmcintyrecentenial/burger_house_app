@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 mixin ValidatorMixin<T extends SegueNotifierViewProvider> {
 
-  void onValidate(BuildContext context, T provider,GenericArgs? args, {String? routeName})  {
+  void onValidate(BuildContext context, T provider,GenericArgs? args, {String? routeName, shouldHideKeyboard = true})  {
     Helper.showErrorException(() {
       if (provider.isOk(context, args: args)) {
         provider.updateSegueObject(args: args);
@@ -16,7 +16,7 @@ mixin ValidatorMixin<T extends SegueNotifierViewProvider> {
       else{
         onFailValidation(context);
       }
-    }, context: context);
+    }, context: context,shouldHideKeyboard: shouldHideKeyboard);
   }
 
   void onSuccessValidation(BuildContext context, { String? routeName, T? provider,GenericArgs? args }){
