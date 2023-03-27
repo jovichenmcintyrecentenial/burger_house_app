@@ -5,7 +5,7 @@ import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/providers/address_bottom_sheet_provider.dart';
 import 'package:burger_house/views/widgets/app_bars/title_app_bar_widget.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
-import 'package:burger_house/views/widgets/empty_address_widget/empty_address_widget.dart';
+import 'package:burger_house/views/widgets/empty_list_widget/empty_address_widget.dart';
 import 'package:burger_house/views/widgets/generic_Image_handler.dart';
 import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/main_button_widget.dart';

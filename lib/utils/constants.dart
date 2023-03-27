@@ -45,6 +45,8 @@ class Images {
   static var mapPinIcon = '${assetImage}map_pin_icon.svg';
   static var noAdderssIcon = '${assetImage}no_adderss_icon.svg';
   static var loader = '${assetImage}loaded.riv';
+  static var noPaymentIcon = '${assetImage}empty_card_icon.svg';
+
 
 
 

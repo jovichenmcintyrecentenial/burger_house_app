@@ -5,6 +5,7 @@ import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/address_bottom_sheet.dart';
+import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/payment_bottom_sheet.dart';
 import 'package:burger_house/views/pages/order_confirmation/providers/order_confirmation_provider.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/edit_app_button.dart';
@@ -73,7 +74,23 @@ class OrderConfirmationView extends StatelessWidget {
                             ),
                             SizedBox(height: 15,),
                             UserCheckoutTitleItem(
-                              onTap: (){},
+                              onTap: () async {
+                                Helper.hideKeyboard(context);
+                                var data = await showModalBottomSheet<Address>(
+                                  context: context,
+                                  isDismissible: true,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (BuildContext context) {
+                                    return PaymentBottomSheet();
+                                  },
+                                );
+
+                                if(data != null){
+                                  provider.address = data;
+                                }
+
+                              },
                               image: Images.cardIcon,
                               title: 'Payment Method',
                               data: 'Tap here to add a payment method',
@@ -170,9 +187,6 @@ class _RowItemLabelData extends StatelessWidget {
     );
   }
 }
-
-
-
 class _HorizontalMenuItemList extends StatelessWidget {
   const _HorizontalMenuItemList({
     required this.scale,

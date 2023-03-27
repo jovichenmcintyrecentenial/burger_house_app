@@ -11,6 +11,7 @@ import 'package:burger_house/views/widgets/input_widget.dart';
 import 'package:burger_house/views/widgets/main_button_widget.dart';
 import 'package:burger_house/views/widgets/scaffolds/scaffold_main_app_bar.dart';
 import 'package:burger_house/views/pages/sign_in/providers/login_provider.dart';
+import 'package:rive/rive.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,14 @@ class LoginView extends StatelessWidget with ValidatorMixin<LoginProvider> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children:   [
+                    // SizedBox(
+                    //   height: 200,
+                    //   width:200,
+                    //   child: RiveAnimation.asset(
+                    //     Images.loader,
+                    //     controllers: [provider.controller],
+                    //   ),
+                    // ),
                     const GenericImagehandler(Images.logoFull,width: double.infinity,),
                     const SizedBox(height: 17,),
                     InputWidget(title:'Username',controller:provider.usernameTextController),
