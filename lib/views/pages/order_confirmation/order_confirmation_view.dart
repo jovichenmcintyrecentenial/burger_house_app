@@ -1,3 +1,4 @@
+import 'package:burger_house/data/models/response_model/card_response.dart';
 import 'package:burger_house/models/address.dart';
 import 'package:burger_house/models/segue_model/order_segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
@@ -76,7 +77,7 @@ class OrderConfirmationView extends StatelessWidget {
                             UserCheckoutTitleItem(
                               onTap: () async {
                                 Helper.hideKeyboard(context);
-                                var data = await showModalBottomSheet<Address>(
+                                var data = await showModalBottomSheet<CardResponse>(
                                   context: context,
                                   isDismissible: true,
                                   isScrollControlled: true,
@@ -87,14 +88,16 @@ class OrderConfirmationView extends StatelessWidget {
                                 );
 
                                 if(data != null){
-                                  provider.address = data;
+                                  provider.card = data;
                                 }
 
                               },
                               image: Images.cardIcon,
-                              title: 'Payment Method',
-                              data: 'Tap here to add a payment method',
-                            ),
+                              title: provider.card != null?'Master Card':'Payment Method',
+                            data: provider.card != null
+                                ? provider.card!.getMaskedNumber()
+                                : 'Tap here to add a payment method',
+                          ),
                           ],
                         );
                       }

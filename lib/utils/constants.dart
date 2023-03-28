@@ -47,6 +47,8 @@ class Images {
   static var loader = '${assetImage}loaded.riv';
   static var noPaymentIcon = '${assetImage}empty_card_icon.svg';
 
+  static var cardLogo = '${assetImage}card_logo.png';
+
 
 
 

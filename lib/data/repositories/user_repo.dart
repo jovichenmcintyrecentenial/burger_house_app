@@ -1,5 +1,7 @@
 import 'package:burger_house/data/models/request_models/add_address_requesst.dart';
+import 'package:burger_house/data/models/request_models/add_card_request.dart';
 import 'package:burger_house/data/models/request_models/add_user_request.dart';
+import 'package:burger_house/data/models/response_model/card_response.dart';
 import 'package:burger_house/data/models/response_model/user_response_model.dart';
 import 'package:burger_house/models/address.dart';
 import 'package:retrofit/retrofit.dart';
@@ -33,9 +35,25 @@ abstract class UserRepo {
       );
 
   //add new address user
-  @POST('/users/addresses')
+  @POST('/users/cards')
   Future<Address> addNewAddress(
       @Body() AddAddressRequest userRequest);
+
+
+
+  @GET('/users/cards')
+  Future<List<CardResponse>> getMyCards(
+      @DioOptions() dioOptions);
+
+  @DELETE('/users/cards/{id}')
+  Future deleteCards(
+      @Path('id') addressId
+      );
+
+  @POST('/users/cards')
+  Future<CardResponse> addNewCards(
+      @Body() AddCardRequest cardRequest);
+
 
 
 

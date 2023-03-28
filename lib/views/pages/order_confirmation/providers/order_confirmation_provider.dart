@@ -1,5 +1,6 @@
 
 import 'package:burger_house/data/models/request_models/order_request_model.dart';
+import 'package:burger_house/data/models/response_model/card_response.dart';
 import 'package:burger_house/data/models/response_model/menu_item.dart';
 import 'package:burger_house/data/models/response_model/order_response_model.dart';
 import 'package:burger_house/data/repositories/order_repo.dart';
@@ -21,6 +22,8 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
   var _cart = ServiceLocator.locator<Cart>();
 
   Address? address;
+
+  CardResponse? card;
 
   OrderConfirmationViewProvider(){
     estimateFees();
