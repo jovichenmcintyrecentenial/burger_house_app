@@ -1,5 +1,4 @@
 import 'package:burger_house/data/models/response_model/card_response.dart';
-import 'package:burger_house/models/mixins/validator_mixin.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/providers/payment_bottom_sheet_provider.dart';

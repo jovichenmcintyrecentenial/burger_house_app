@@ -25,7 +25,7 @@ abstract class SegueModel {
   ///Message to display to user when apiRequest Future throw an error
   String? onFailMessage;
   ///An future call that you want to be run on GenericProcessing Screen here
-  dynamic apiRequest;
+  Future Function()? apiRequest;
   ///set this when you want onFail state to Navigator pop to previous page
   /// if apiRequest is an Instant of FailRequest you can force a fail render on UI
   String? positiveButtonTitle;

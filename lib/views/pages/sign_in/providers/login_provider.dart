@@ -9,7 +9,6 @@ import 'package:burger_house/utils/cache_helper.dart';
 import 'package:burger_house/utils/extensions/string_extension.dart';
 import 'package:burger_house/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:rive/rive.dart';
 
 import '../../../../models/login_manager.dart';
 
@@ -17,7 +16,6 @@ class LoginProvider extends SegueNotifierViewProvider {
 
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
-  // RiveAnimationController controller = SimpleAnimation('loading');
 
   //call login api
   void login(onComplete) {
@@ -39,7 +37,6 @@ class LoginProvider extends SegueNotifierViewProvider {
   //validate inputted data
   @override
   bool isOk(BuildContext context, {GenericArgs? args}) {
-    // controller = SimpleAnimation('loading');
     notifyListenersSafe();
     var username = usernameTextController.text;
     var password = passwordTextController.text;

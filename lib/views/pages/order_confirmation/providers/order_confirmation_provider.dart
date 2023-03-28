@@ -39,7 +39,7 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
     List<String> menuIds = cart.items.map((MenuItem menuItem)=>menuItem.id.toString()).toList();
     orderRequest.menuItemsIds = menuIds;
     try {
-      orderDetails = await ServiceLocator.locator<OrderRepo>().getFeeEstimate(
+      orderDetails = await ServiceLocator.locator<OrderRepo>().createOrder(
           pullFromNet(), orderRequest);
     }
     catch(e){
@@ -85,7 +85,8 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
   @override
   void updateSegueObject({GenericArgs<OrderSegueModel>? args}) {
     args!.param.address = address;
-    args.param.paymentMethodId = paymentMethodId;
+    args.param.card = card;
+    args.param.menuIds;
 
   }
 

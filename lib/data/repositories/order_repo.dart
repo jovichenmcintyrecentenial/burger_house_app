@@ -11,9 +11,13 @@ abstract class OrderRepo {
   factory OrderRepo(Dio dio, {String baseUrl}) = _OrderRepo;
 
   @POST('/orders')
-  Future<Order> getFeeEstimate(
+  Future<Order> createOrder(
       @DioOptions() dioOptions,
         @Body()  OrderRequest orderRequest,
+  );
+  @POST('/orders/{id}/verify')
+  Future<Order> verifyOrder(
+        @Path('id') String id,
   );
 
 
