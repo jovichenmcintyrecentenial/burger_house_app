@@ -67,19 +67,17 @@ class OrderConfirmationViewProvider extends SegueNotifierViewProvider<OrderSegue
   @override
   bool isOk(BuildContext context, {GenericArgs<OrderSegueModel>? args}) {
 
-    var noAddressMessage = 'Please select/create a deliver address';
-    var noPaymentMethodMessage = 'Please select/create a deliver address';
+    var noAddressMessage = 'Please select a deliver address';
+    var noPaymentMethodMessage = 'Please select a payment method address';
 
     if(address == null){
       throw DisplayableException(noAddressMessage);
     }
 
-    if(paymentMethodId == null){
+    if(card == null){
       throw DisplayableException(noPaymentMethodMessage);
     }
-    else if(paymentMethodId!.isEmpty){
-      throw DisplayableException(noPaymentMethodMessage);
-    }
+
 
     return true;
   }

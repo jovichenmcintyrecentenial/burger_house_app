@@ -66,6 +66,7 @@ class LoginView extends StatelessWidget with ValidatorMixin<LoginProvider> {
                       const SizedBox(
                         height: 25,
                       ),
+
                       const _ForgotPasswordWidget(),
                     ],
                 ),
@@ -88,6 +89,8 @@ class LoginView extends StatelessWidget with ValidatorMixin<LoginProvider> {
 
 
 }
+
+
 
 class _ForgotPasswordWidget extends StatelessWidget {
   const _ForgotPasswordWidget();

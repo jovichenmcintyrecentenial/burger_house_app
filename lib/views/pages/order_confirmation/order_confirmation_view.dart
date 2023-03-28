@@ -1,5 +1,6 @@
 import 'package:burger_house/data/models/response_model/card_response.dart';
 import 'package:burger_house/models/address.dart';
+import 'package:burger_house/models/mixins/validator_mixin.dart';
 import 'package:burger_house/models/segue_model/order_segue_model.dart';
 import 'package:burger_house/route/app_routes.dart';
 import 'package:burger_house/theme/app_theme.dart';
@@ -8,6 +9,7 @@ import 'package:burger_house/utils/helper.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/address_bottom_sheet.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/payment_bottom_sheet.dart';
 import 'package:burger_house/views/pages/order_confirmation/providers/order_confirmation_provider.dart';
+import 'package:burger_house/views/pages/processing_screen/processing_view.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/edit_app_button.dart';
 import 'package:burger_house/views/widgets/grid_view.dart';
@@ -19,7 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class OrderConfirmationView extends StatelessWidget {
+class OrderConfirmationView extends StatelessWidget  with ValidatorMixin<OrderConfirmationViewProvider>  {
 
   OrderConfirmationView({
     super.key,this.args,
@@ -119,7 +121,10 @@ class OrderConfirmationView extends StatelessWidget {
                         SizedBox(height: 20,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: MainButtonWidget('Place Order', onTap: (){},),
+                          child: MainButtonWidget('Place Order', onTap: () {
+                              onValidate(context,provider,args, routeName:ProcessingView.routeName);
+                          }
+                          ,),
                         )
                       ],
                     );

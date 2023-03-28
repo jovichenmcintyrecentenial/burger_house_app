@@ -3,6 +3,7 @@ import 'package:burger_house/views/pages/main_view/main_manager_view.dart';
 import 'package:burger_house/views/pages/main_view/menu_type_view.dart';
 import 'package:burger_house/views/pages/main_view/profile_view.dart';
 import 'package:burger_house/views/pages/order_confirmation/order_confirmation_view.dart';
+import 'package:burger_house/views/pages/processing_screen/processing_view.dart';
 import 'package:burger_house/views/pages/sign_in/login_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
@@ -78,6 +79,10 @@ class AppRoutes {
     }));
     router.define(ProfileView.routeName, handler: Handler(handlerFunc: (context,params){
       return ProfileView();
+    }));
+    router.define(ProcessingView.routeName, handler: Handler(handlerFunc: (context,params){
+      final args = context!.settings!.arguments;
+      return ProcessingView(args: args as GenericArgs<OrderSegueModel>?);
     }));
     router.define(OrderConfirmationView.routeName, handler: Handler(handlerFunc: (context,params){
       final args = context!.settings!.arguments;

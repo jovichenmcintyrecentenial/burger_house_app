@@ -1,6 +1,4 @@
-import 'package:burger_house/data/models/request_models/add_user_request.dart';
 import 'package:burger_house/data/models/response_model/places_api_response.dart';
-import 'package:burger_house/data/models/response_model/user_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 

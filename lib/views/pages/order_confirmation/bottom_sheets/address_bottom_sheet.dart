@@ -145,9 +145,7 @@ class AddressBottomSheet extends StatelessWidget {
 }
 
 class _ListOfAddresses extends StatelessWidget {
-  const _ListOfAddresses({
-    super.key,
-  });
+  const _ListOfAddresses();
 
   @override
   Widget build(BuildContext context) {
@@ -265,9 +263,7 @@ class LocationsListItem extends StatelessWidget {
 }
 
 class _CloseButton extends StatelessWidget {
-  const _CloseButton({
-    super.key,
-  });
+  const _CloseButton();
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:burger_house/data/models/response_model/card_response.dart';
+import 'package:burger_house/models/mixins/validator_mixin.dart';
 import 'package:burger_house/theme/app_theme.dart';
 import 'package:burger_house/utils/constants.dart';
 import 'package:burger_house/views/pages/order_confirmation/bottom_sheets/providers/payment_bottom_sheet_provider.dart';
@@ -11,7 +12,7 @@ import 'package:burger_house/views/widgets/main_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PaymentBottomSheet extends StatelessWidget {
+class PaymentBottomSheet extends StatelessWidget{
   const PaymentBottomSheet({
     super.key,
   });
@@ -98,9 +99,7 @@ class PaymentBottomSheet extends StatelessWidget {
 
 
 class _ListOfCards extends StatelessWidget {
-  const _ListOfCards({
-    super.key,
-  });
+  const _ListOfCards();
 
   @override
   Widget build(BuildContext context) {
@@ -174,14 +173,14 @@ class CardListItem extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(width: 10,),
-                    GenericImagehandler(Images.cardLogo,width: 65,),
-                    SizedBox(width: 20,),
+                    GenericImagehandler(Images.cardLogo,width: 55,),
+                    SizedBox(width: 30,),
                     Flexible(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AutoTextSizeWidget(
-                      "**** ***** **** " +
+                      "****  *****  ****  " +
                               card.cardNumber!.substring(
                                   card.cardNumber!.length - 4,
                                   card.cardNumber!.length),
@@ -193,7 +192,7 @@ class CardListItem extends StatelessWidget {
                                 AutoTextSizeWidget(card.cardDate!,color:Color(0xff7A7D86),fontSize: 18),
                                 Spacer(),
                                 AutoTextSizeWidget(card.cvv.toString(),color:Color(0xff7A7D86),fontSize: 18),
-                                SizedBox(width:80,)
+                                SizedBox(width:65,)
                               ],
                             )
                           ],
