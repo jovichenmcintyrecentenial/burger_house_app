@@ -9,12 +9,14 @@ import '../keyboard_visibility_builder.dart';
 class ScaffoldMainAppBar extends StatelessWidget {
   final Widget? stackBottom;
 
+  final Widget? leading;
+
   const ScaffoldMainAppBar({
     Key? key,
     required this.title,
     required this.backgroundColor,
     required this.body,
-    this.appBarColor, this.actions, this.shouldScroll = false, this.stackBottom,
+    this.appBarColor, this.actions, this.shouldScroll = false, this.stackBottom, this.leading,
   }) : super(key: key);
 
   final String title;
@@ -27,7 +29,7 @@ class ScaffoldMainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarMainColor(title: title,actions:actions),
+      appBar: AppBarMainColor(title: title,actions:actions,leading: leading,),
       backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: false,
       body: !shouldScroll

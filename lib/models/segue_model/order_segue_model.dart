@@ -4,9 +4,11 @@ import 'package:burger_house/data/models/request_models/order_request_model.dart
 import 'package:burger_house/data/models/response_model/card_response.dart';
 import 'package:burger_house/data/repositories/order_repo.dart';
 import 'package:burger_house/models/address.dart';
+import 'package:burger_house/models/cart.dart';
 import 'package:burger_house/models/segue_model/segue_model.dart';
 import 'package:burger_house/services/service_locator.dart';
 import 'package:burger_house/utils/cache_helper.dart';
+import 'package:burger_house/views/pages/main_view/providers/main_manager_view_provider.dart';
 import 'package:flutter/widgets.dart';
 
 class OrderSegueModel extends SegueModel {
@@ -21,6 +23,13 @@ class OrderSegueModel extends SegueModel {
     var order = await _orderRepo.createOrder(
         pullFromNet, (OrderRequest(menuItemsIds: menuIds, estimate: false)));
     return await _orderRepo.verifyOrder(order.id!);
+  }
+
+  @override
+  void onComplete(BuildContext context) {
+    super.onComplete(context);
+    MainManagerProvider.stream.add(2);
+    ServiceLocator.locator<Cart>().clearCart();
   }
 
 

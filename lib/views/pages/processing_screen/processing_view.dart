@@ -54,6 +54,7 @@ class ProcessingView extends StatelessWidget {
         return Consumer<ProcessingViewProvider>(
           builder: (context, provider, snapshot) {
             return ScaffoldMainAppBar(
+              leading:SizedBox(),
               title: args!.param.title!,
               backgroundColor: AppTheme.of(context).primaryColor,
               body:  Padding(
@@ -93,10 +94,10 @@ class ProcessingViewProvider extends SegueNotifierViewProvider {
 
   RiveAnimationController controller = SimpleAnimation('loading');
   final GenericArgs<SegueModel>? args;
-
+  final BuildContext context;
   ProcessingState state = ProcessingState.loading;
 
-  ProcessingViewProvider(BuildContext context,this.args,){
+  ProcessingViewProvider(this.context,this.args,){
     args!.param.preProcessing(context);
     processSegue();
   }
@@ -120,6 +121,9 @@ class ProcessingViewProvider extends SegueNotifierViewProvider {
   void processSegue() {
     args!.param.apiRequest!().then((_){
       displaySuccess();
+      Future.delayed(Duration(seconds: 4), () {
+        args!.param.onComplete(context);
+      });
     }).onError((__,_){
       displayError();
     }).whenComplete((){
