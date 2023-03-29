@@ -74,7 +74,12 @@ class Cart {
     items = tempItems;
   }
 
-  static createOrderRequest(){
+  List<String> getMenuIds(){
+    List<String> ids = [];
+    for(var item in items){
+      ids.add(item.id!);
+    }
 
+    return ids;
   }
 }

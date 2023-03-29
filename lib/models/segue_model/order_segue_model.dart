@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 class OrderSegueModel extends SegueModel {
   Address? address;
   var _orderRepo = ServiceLocator.locator<OrderRepo>();
+  var _carts = ServiceLocator.locator<Cart>();
 
   CardResponse? card;
 
@@ -21,7 +22,7 @@ class OrderSegueModel extends SegueModel {
 
   Future<dynamic> createOrder() async {
     var order = await _orderRepo.createOrder(
-        pullFromNet, (OrderRequest(menuItemsIds: menuIds, estimate: false)));
+        pullFromNet, (OrderRequest(menuItemsIds: _carts.getMenuIds(), estimate: false)));
     return await _orderRepo.verifyOrder(order.id!);
   }
 
