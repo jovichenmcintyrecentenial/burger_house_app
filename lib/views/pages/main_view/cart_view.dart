@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/cart.dart';
+import '../../widgets/empty_list_widget/empty_cart_widget.dart';
 
 class CartView extends StatelessWidget {
   CartView({
@@ -91,41 +92,6 @@ class CartView extends StatelessWidget {
   }
 }
 
-class EmptyCartWidget extends StatelessWidget {
-  const EmptyCartWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: GenericImagehandler(Images.emptyCartIcon,width: 220,fit: BoxFit.fill,)),
-          SizedBox(height: 30,),
-          AutoTextSizeWidget('No items in your cart.',color:Color(0xffE1E3EB),fontSize: 20,fontWeight: FontWeight.w600,),
-          AutoTextSizeWidget(
-            'When you add items to your cart, they will appear here',
-            fontSize: 15,
-            color: Color(0xff7A7D86),
-            textAlign: TextAlign.center,
-            maxLine: 2,
-          ),
-          SizedBox(height: 20,),
-          MainButtonWidget('Start Shopping', onTap: (){
-            MainManagerProvider.stream.add(1);
-
-          }),
-          SizedBox(height: 60,),
-
-        ],
-      ),
-    );
-  }
-}
 
 class _CartTotalWidget extends StatelessWidget {
   const _CartTotalWidget({

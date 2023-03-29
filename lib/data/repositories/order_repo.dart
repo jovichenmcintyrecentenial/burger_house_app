@@ -15,6 +15,13 @@ abstract class OrderRepo {
       @DioOptions() dioOptions,
         @Body()  OrderRequest orderRequest,
   );
+
+  @GET('/orders')
+  Future<List<Order>> getOrders(
+      @DioOptions() dioOptions,
+  );
+
+
   @POST('/orders/{id}/verify')
   Future<Order> verifyOrder(
         @Path('id') String id,

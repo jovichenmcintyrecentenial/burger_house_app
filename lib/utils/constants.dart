@@ -48,6 +48,7 @@ class Images {
   static var noPaymentIcon = '${assetImage}empty_card_icon.svg';
 
   static var cardLogo = '${assetImage}card_logo.png';
+  static var bagWithLogo = '${assetImage}burger_house_bag.png';
 
 
 

@@ -1,4 +1,6 @@
+import 'package:burger_house/data/models/response_model/order_response_model.dart';
 import 'package:burger_house/theme/app_theme.dart';
+import 'package:burger_house/utils/extensions/date_time_extension.dart';
 import 'package:burger_house/views/widgets/auto_text_size_widget.dart';
 import 'package:burger_house/views/widgets/horizontal_divider.dart';
 import 'package:burger_house/views/widgets/main_button_small_widget.dart';
@@ -6,8 +8,9 @@ import 'package:flutter/material.dart';
 
 class OrderCardWidget extends StatelessWidget {
   final bool isActive;
+  final Order order;
 
-  const OrderCardWidget({
+  const OrderCardWidget(this.order, {
     this.isActive = false,
     super.key,
   });
@@ -25,19 +28,19 @@ class OrderCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildGreyFonts('Order number: 3328'),
+          buildGreyFonts('Order number: ${order.id?.substring(5,9).toUpperCase()}'),
           SizedBox(height: 5,),
           Row(
             children: [
-              Expanded(child: buildWhiteFonts('January 12, 10:32 AM')),
-              buildWhiteFonts('\$50.00'),
+              Expanded(child: buildWhiteFonts(order.createdAt!.getFormattedDateLocalWords())),
+              buildWhiteFonts('\$${order.getTotalFormatted()}'),
             ],
           ),
           SizedBox(height: 14,),
           HorizontalDivider(),
           SizedBox(height: 12,),
-          buildGreyFonts('3 Items'),
-          buildGreyFonts('HOUSE Double and 2 more items ...'),
+          buildGreyFonts('${order.menuItems?.length} Items'),
+          buildGreyFontsEllipsis(order.getOrderItemsName()),
           SizedBox(height: 15,),
           Row(
             children: [
@@ -52,6 +55,18 @@ class OrderCardWidget extends StatelessWidget {
 
     );
   }
+
+  Text buildGreyFontsEllipsis(String text, {double? fontSize}) {
+    return Text(
+      text,
+      style: TextStyle(color: Color(0xff7A7D86),
+        fontSize: fontSize??13,
+      fontWeight: FontWeight.w500),
+      overflow: TextOverflow.ellipsis,
+
+    );
+  }
+
 
   AutoTextSizeWidget buildGreyFonts(String text, {double? fontSize}) {
     return AutoTextSizeWidget(

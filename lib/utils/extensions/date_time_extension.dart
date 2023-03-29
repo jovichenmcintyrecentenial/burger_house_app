@@ -11,4 +11,9 @@ extension DataTimeExtensions on DateTime {
     final f = DateFormat('dd/MM/yy @ hh:mm a');
     return f.format(this);
   }
+
+  String getFormattedDateLocalWords({DateTime? localTime}){
+    final f = DateFormat('MMMM dd, y');
+    return f.format(toLocal());
+  }
 }

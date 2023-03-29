@@ -17,8 +17,12 @@ class Order {
     this.isVerified,
     this.isDelivered,
     this.id,
-  });
+    this.createdAt,
+    this.updatedAt,
 
+  });
+  DateTime? createdAt;
+  DateTime? updatedAt;
   List<MenuItem>? menuItems;
   List<Fee>? fees;
   String? customerId;
@@ -37,6 +41,8 @@ class Order {
     isVerified: json["is_verified"],
     isDelivered: json["is_delivered"],
     id: json["_id"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -48,11 +54,24 @@ class Order {
     "is_verified": isVerified,
     "is_delivered": isDelivered,
     "_id": id,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
   };
 
   String getTotalFormatted(){
 
     return NumberFormatter.format(amount: total.toString(),dp: 2);
+  }
+
+
+  String getOrderItemsName() {
+
+    Set<String> names = {};
+    for(var menu in menuItems!){
+      names.add(menu.name!);
+    }
+    return names.toList().join(', ');
+
   }
 }
 
