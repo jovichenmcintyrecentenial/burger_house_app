@@ -87,14 +87,15 @@ class AddressBottomSheetProvider extends SegueNotifierViewProvider{
   }
 
   Future<void> selectedAddress(Result result) async {
-    updateState(PageState.viewAddress);
-    startLoading();
+
 
     await _userRepo.addNewAddress(AddAddressRequest(
         address: result.formattedAddress,
         latitude: result.geometry?.location?.lat ?? 0,
         longitude: result.geometry?.location?.lng ?? 0,
     ));
+    updateState(PageState.viewAddress);
+    startLoading();
     updateList();
   }
 

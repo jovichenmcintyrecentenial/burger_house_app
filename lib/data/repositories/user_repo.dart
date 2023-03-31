@@ -35,7 +35,7 @@ abstract class UserRepo {
       );
 
   //add new address user
-  @POST('/users/cards')
+  @POST('/users/addresses')
   Future<Address> addNewAddress(
       @Body() AddAddressRequest userRequest);
 

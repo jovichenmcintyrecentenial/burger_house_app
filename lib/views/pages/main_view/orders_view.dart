@@ -58,9 +58,10 @@ class OrdersView extends StatelessWidget {
                                     shrinkWrap: true,
                                     itemCount: data!.length,
                                     itemBuilder: (context, i) {
+                                      var reversed = data.reversed.toList();
                                       return Column(
                                         children: [
-                                          OrderCardWidget(data[i]),
+                                          OrderCardWidget(reversed[i]),
                                           SizedBox(height: 15,)
                                         ],
                                       );
